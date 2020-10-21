@@ -1,14 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/clientes">Clientes</router-link> |
+      <router-link to="/form">Form</router-link> |
+      <router-link to="/Busqueda">Busqueda</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <style>
+@import "./static/css/index.css";
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -29,4 +37,33 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.red-button {
+  background-color: #b93131;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+} */
+
 </style>
+
+<script src="./static/js/index"></script>

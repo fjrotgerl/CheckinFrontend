@@ -1,0 +1,23 @@
+{
+
+    "es": {
+        "PLACEHOLDER_FIELD": "Apellido",
+        "PLACEHOLDER_FECHA_ENTRADA": "Fecha de entrada",
+        "PLACEHOLDER_FECHA_SALIDA": "Fecha de salida",
+        "PLACEHOLDER_LOCALIZADOR": "Localizador",
+        "MENSAJE_ERROR": "Faltan campos a rellenar",
+        "TEXTO_BOTON_ENVIAR": "Enviar",
+        "MENSAJE_DATO_OBLIGATORIO": "Dato obligatorio"
+    },
+
+    "en": {
+        "PLACEHOLDER_FIELD": "Name",
+        "PLACEHOLDER_FECHA_ENTRADA": "Enter date",
+        "PLACEHOLDER_FECHA_SALIDA": "Leaving date",
+        "PLACEHOLDER_LOCALIZADOR": "Localizator",
+        "MENSAJE_ERROR": "Error",
+        "TEXTO_BOTON_ENVIAR": "Send",
+        "MENSAJE_DATO_OBLIGATORIO": "Needed data"
+    }
+    
+}
