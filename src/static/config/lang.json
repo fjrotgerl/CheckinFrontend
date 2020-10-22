@@ -7,7 +7,10 @@
         "PLACEHOLDER_LOCALIZADOR": "Localizador",
         "MENSAJE_ERROR": "Faltan campos a rellenar",
         "TEXTO_BOTON_ENVIAR": "Enviar",
-        "MENSAJE_DATO_OBLIGATORIO": "Dato obligatorio"
+        "MENSAJE_DATO_OBLIGATORIO": "Dato obligatorio",
+        "AGREGAR_NUEVO_USUARIO": "Agregar un nuevo usuario",
+        "TERMINAR": "Finalizar",
+        "RESERVA_NO_ENCONTRADA": "No se ha encontrado ninguna reserva"
     },
 
     "en": {

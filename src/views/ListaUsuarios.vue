@@ -2,42 +2,42 @@
   <div class="body">
     <!-- HEAD FIJO CON BACKGROUND -->
         <div class="c-background w-100 h-100 position-fixed bg bg-mask bg-mask-white-05">
-            <img src="{URL_IMAGEN_FONDO}" alt="" class="img w-100 h-100 img-auto">
+            <img :src="this.style.URL_IMAGEN_FONDO" alt="" class="img w-100 h-100 img-auto">
         </div>
         <!-- HEAD FIJO CON BACKGROUND -->
 
         <!-- FORM -->
         <div class="container-fluid principal mt-start mb-5">
             <div class="row justify-content-center">
-                <div class="c-form p-3 p-lg-5 col-11 col-md-7 col-xl-5 position position-z-1" style="background-color: {COLOR_BACKGROUND};">
+                <div class="c-form p-3 p-lg-5 col-11 col-md-7 col-xl-5 position position-z-1" :style="'background-color: ' + this.style.COLOR_FONDO_CUADRO_FORMULARIO + ';'">
                     <div class="c-brand col-6 px-4 mx-auto mb-3 mb-lg-5">
                         <a href="" class="btn btn-reset btn-block">
                             <img src="https://www.aluahotels.com/uploads/logoshotel/svg/logo-alua-header.svg" alt="" class="img img-w img-auto">
                         </a>
                     </div>
                     <div class="w-100">
-                        <div v-for="cliente in customersData" v-bind:key="cliente.NumeroCliente">
-                            <div @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido)" class="b-user col-12 mb-3 d-flex flex-wrap align-items-center pr-0" style="background-color: {COLOR_FILAS};">
-                                <div v-if="cliente.Estado === 1">
-                                    <i class="icon fas fa-check icon-size-1-4 icon-color-gray_dark mr-3"></i>
+                        <div v-for="cliente in customersWithConfirmation" v-bind:key="cliente.data.NumeroCliente">
+                            <div class="b-user col-12 mb-3 d-flex flex-wrap align-items-center pr-0" style="background-color: {COLOR_FILAS};">
+                                <div v-if="cliente.completado">
+                                    <i class="icon fas fa-check icon-size-1-4 icon-color-white mr-3"></i>
                                 </div>
-                                <div v-if="cliente.Estado === 0">
-                                    <i class="icon fas fa-times icon-size-1-4 icon-color-gray_dark mr-3"></i>
+                                <div v-else>
+                                    <i class="icon fas fa-times icon-size-1-4 icon-color-white mr-3"></i>
                                 </div>
                                 
-                                <p class="text mb-0"><i class="icon icon-color-gray_icon fas fa-user-friends mr-2"></i>{{cliente.Nombre + " " + cliente.Apellido1 + " " + cliente.Apellido2}}</p>
+                                <p class="text mb-0"><i class="icon icon-color-white fas fa-user-friends mr-2"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
                                 <div class="actions d-flex ml-auto">
-                                    <button class="btn btn-solid p-lg-3" style="background-color: {COLOR_BOTON_EDITAR};"><i class="icon fas fa-pen icon-color-white"></i></button>
-                                    <button class="btn btn-solid p-lg-3" style="background-color: {COLOR_BOTON_ELIMINAR};"><i class="icon far fa-trash-alt icon-color-white"></i></button>
+                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i class="icon fas fa-pen icon-color-white"></i></button>
+                                    <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group col-12 px-0">
-                            <button type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_AÑADIRNUEVO}; color: {COLOR_TEXT};">{TXT_AGREGAR NUEVO USUARIO}</button>
+                            <button @click="$router.push('/nuevousuario')" type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_AÑADIRNUEVO}; color: {COLOR_TEXT};">{{textValues.AGREGAR_NUEVO_USUARIO}}</button>
                         </div>
                         <div class="form-group col-12 px-0">
-                            <button type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_TERMINAR}; color: {COLOR_TEXT}; ">{TXT_TERMINAR}</button>
+                            <button type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_TERMINAR}; color: {COLOR_TEXT}; ">{{textValues.TERMINAR}}</button>
                         </div>
                     </div>
                 </div>
@@ -121,6 +121,7 @@ export default {
                 fecha_salida: this.$route.query.fechasalida,
                 apellido: this.$route.query.apellido
             },
+            customersWithConfirmation: [],
             customersData: {},
             reservaData: {},
             actualProfile: "default",
@@ -171,8 +172,7 @@ export default {
             this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
                 .then(response => {
                     this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
-                            console.log(this.customersData)
-
+                    this.isReservaComplete();
                 }).catch(error => {
                     console.log(error)
                 });
@@ -189,6 +189,19 @@ export default {
                 document.getElementById("listEng").classList.add("active");
             }  
         },
+
+        isReservaComplete() {
+
+            this.customersData.forEach(client => {
+                if (client.AceptaInfo === true && client.Apellido1 != "" && client.Email != "" && client.Edad != ""
+                && client.IDDocumento != "" && client.Nombre != "" && client.DC.Pais != "" && client.DC.Telefono != "" && client.TipoDocumento != "") {
+                    this.customersWithConfirmation.push({ 'completado': true, 'data': client });
+                } else {
+                    this.customersWithConfirmation.push({ 'completado': false, 'data': client });
+                }
+            });
+
+        }
     },
 
     created() {

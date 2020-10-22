@@ -2,7 +2,7 @@
   <div class="body">
     <!-- HEAD FIJO CON BACKGROUND -->
         <div class="c-background w-100 h-100 position-fixed bg bg-mask bg-mask-white-05">
-            <img :src="this.style.URL_IMAGEN_FONDO" alt="" class="img w-100 h-100 img-auto">
+            <img class="img w-100 h-100 img-auto" :src="this.style.URL_IMAGEN_FONDO">
         </div>
         <!-- HEAD FIJO CON BACKGROUND -->
 
@@ -78,6 +78,11 @@
                         <div class="c-message col-12" v-if="submitStatus === 'ERROR'">
                             <!-- AÑADIR SIGUIENTE <p> EN EL CASO DE QUE HAYA UN ERROR -->
                             <p class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR}}</p>
+                        </div>
+
+                        <div class="c-message col-12" v-if="reserva_not_found">
+                            <!-- AÑADIR SIGUIENTE <p> EN EL CASO DE QUE HAYA UN ERROR -->
+                            <p class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.RESERVA_NO_ENCONTRADA}}</p>
                         </div>
 
                         <div class="form-group col-12 mb-4">
@@ -163,6 +168,7 @@ export default {
   name: 'Home',
   data() {
       return {
+          reserva_not_found: false,
           submitStatus: "OK",
           api_url: "",
           data: {
@@ -245,15 +251,19 @@ export default {
     getReserva() {
         this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.data.hotel + "&Localizador=" + this.data.localizador + "&FechaEntrada=" + this.data.fecha_entrada + "&FechaSalida=" + this.data.fecha_salida + "&Apellido=" + this.data.primer_apellido)
         .then(response => {
-            this.$store.commit("setReserva", response.data);
-        }).then(response => this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + this.data.fecha_entrada + "&fechasalida=" + this.data.fecha_salida + "&apellido=" + this.data.primer_apellido))
-        .catch(error => {
+
+            if (response.data.LSReservas.length === 0) {
+                this.reserva_not_found = true;
+            } else {
+                this.reserva_not_found = false;               
+                this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + this.data.fecha_entrada + "&fechasalida=" + this.data.fecha_salida + "&apellido=" + this.data.primer_apellido)
+            }
+
+        }).catch(error => {
             console.log(error)
         });
     },
     toggleBodyClass(langId) {
-        const el = document.body;
-
         if (langId === "langEsp") {
             document.getElementById("listEsp").classList.add("active");
             document.getElementById("listEng").classList.remove("active");
@@ -261,7 +271,6 @@ export default {
             document.getElementById("listEsp").classList.remove("active");
             document.getElementById("listEng").classList.add("active");
         }
-        
     },
   },
   created() {
