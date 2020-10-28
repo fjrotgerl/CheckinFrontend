@@ -25,17 +25,23 @@
                                     <i class="icon fas fa-times icon-size-1-4 icon-color-white mr-3"></i>
                                 </div>
                                 
-                                <p class="text mb-0"><i class="icon icon-color-white fas fa-user-friends mr-2"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
+                                <div v-if="cliente.data.Nombre != ''">
+                                    <p class="text mb-0"><i class="icon icon-color-white fas fa-user-friends mr-2"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
+                                </div>
+                                <div v-else>
+                                    <p class="text mb-0"><i class="icon icon-color-white fas fa-user-friends mr-2"></i>Cliente pendiente a rellenar</p>
+                                </div>
+                                
                                 <div class="actions d-flex ml-auto">
-                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i class="icon fas fa-pen icon-color-white"></i></button>
-                                    <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button>
+                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido + '&id=' + cliente.data.NumeroCliente)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i class="icon fas fa-pen icon-color-white"></i></button>
+                                    <!-- <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button> -->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group col-12 px-0">
+                        <!-- <div class="form-group col-12 px-0">
                             <button @click="$router.push('/nuevousuario')" type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_AÑADIRNUEVO}; color: {COLOR_TEXT};">{{textValues.AGREGAR_NUEVO_USUARIO}}</button>
-                        </div>
+                        </div> -->
                         <div class="form-group col-12 px-0">
                             <button type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_TERMINAR}; color: {COLOR_TEXT}; ">{{textValues.TERMINAR}}</button>
                         </div>
@@ -169,9 +175,11 @@ export default {
 
     methods: {
         getReserva() {
-            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
+            //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
+            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
                 .then(response => {
                     this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
+                    console.log(response.data);
                     this.isReservaComplete();
                 }).catch(error => {
                     console.log(error)
@@ -193,7 +201,7 @@ export default {
         isReservaComplete() {
 
             this.customersData.forEach(client => {
-                if (client.AceptaInfo === true && client.Apellido1 != "" && client.Email != "" && client.Edad != ""
+                if (client.AceptaInfo === true && client.Apellido1 != "" && client.Email != "" && client.Edad != "" && client.DC.Provincia != ""
                 && client.IDDocumento != "" && client.Nombre != "" && client.DC.Pais != "" && client.DC.Telefono != "" && client.TipoDocumento != "") {
                     this.customersWithConfirmation.push({ 'completado': true, 'data': client });
                 } else {

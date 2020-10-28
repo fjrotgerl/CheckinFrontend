@@ -174,10 +174,10 @@ export default {
           data: {
               hotel: "",
               nombre: "",
-              primer_apellido: "Van Ooijen",
-              fecha_entrada: "2020-10-27",
-              fecha_salida: "2020-12-01",
-              localizador: "H20RE200002110"
+              primer_apellido: "",
+              fecha_entrada: "",
+              fecha_salida: "",
+              localizador: ""
           },
           actualProfile: "default",
           actualLang: "es",

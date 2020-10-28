@@ -11,7 +11,11 @@
             "COLOR_BOTON_BORRAR": ""
         },
         "hotels": [
-            {"id": "H20", "value": "Hotel 1"}
+            {
+                "id": "H20",
+                "value": "HOTEL VILLAGE",
+                "docs": ["Doc_1_H20_1_","Doc_2_H00_2_","policia_"]
+            }
         ]
               
     },
