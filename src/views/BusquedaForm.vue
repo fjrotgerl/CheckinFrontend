@@ -87,7 +87,7 @@
 
                         <div class="form-group col-12 mb-4">
                             <label for="" class="sr-only"></label>
-                            <button @click="submit"  type="button" class="btn btn-solid btn-block text" :style="'background-color: ' + this.style.COLOR_BOTON + '; color: ' + this.style.COLOR_TEXTO_BOTON + ';'">{{this.textValues.TEXTO_BOTON_ENVIAR}}</button>
+                            <button @click="submit"  type="button" class="btn btn-solid btn-block text" :style="'background-color: ' + this.style.COLOR_BOTON + '; color: ' + this.style.COLOR_TEXTO_BOTON + ';'">{{this.textValues.TEXTO_BOTON_SIGUIENTE}}</button>
                         </div>
                     </form>
                 </div>
@@ -95,63 +95,86 @@
         </div>
         <!-- FIN FORM DE BUSQUEDA DE RESERVA -->
 
-        <!-- FOOTER DE MARCAS -->
         <div class="container-fluid mb-3">
             <div class="row">
-                <div class="c-logos col-12 py-3" style="background-color: {HEX_BACKGROUND_FONDO_CUADRO_MARCAS};">
+                <div class="c-logos col-12 py-3" style="background-color: #777777;">
                     <h2 class="text title col-12 col-md-6 col-xl-4 mx-md-auto text-center mb-3">
-                        <img src="{URL_LOGO_MARCA_AM_RESORTS}" alt="" class="img img-w">
+                        <img src="https://www.amresortseu.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w">
                     </h2>
                     <div class="wrapper d-flex w-100 flex-wrap justify-content-lg-center">
                         <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
                             <a href="" class="btn btn-reset btn-block">
-                                <img src="{URL_LOGO_MARCA_1}" alt="" class="img img-w img-auto">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
                             </a>
                         </div>
                         <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
                             <a href="" class="btn btn-reset btn-block">
-                                <img src="{URL_LOGO_MARCA_2}" alt="" class="img img-w img-auto">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
                             </a>
                         </div>
                         <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
                             <a href="" class="btn btn-reset btn-block">
-                                <img src="{URL_LOGO_MARCA_3}" alt="" class="img img-w img-auto">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
                             </a>
                         </div>
-                        <!-- ... -->
-                        <!-- ... -->
-                        <!-- ... -->
-                        <!-- ... -->
-                        <!-- ... -->
-                        <!-- ... -->
                         <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
                             <a href="" class="btn btn-reset btn-block">
-                                <img src="{URL_LOGO_MARCA_N}" alt="" class="img img-w img-auto">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
+                            </a>
+                        </div>
+                        <div class="c-brand col-6 col-md-2 col-lg-auto mx-auto mb-3">
+                            <a href="" class="btn btn-reset btn-block">
+                                <img src="https://www.secretslanzarote.com/wp-content/themes/adgtravel/img/logo.png" alt="" class="img img-w img-auto">
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- FIN FOOTER DE MARCAS-->
 
 
-        <!-- SELECTOR IDIOMÁTICO -->
-        <div class="c-menu-lenguage position-fixed p-2 position position-z-1" style="background-color: {HEX_BACKGROUND_CUADRO_IDIOMAS};">
+        <div class="c-menu-lenguage position-fixed bg p-2 position position-z-1" style="background-color: #ffffff;">
             <i class="icon fas fa-angle-down"></i>
             <ul class="menu list-none mb-0">
-                <li id="listEsp" class="item w-100">
-                    <a @click="changeLang('es')" :href="'#/busquedaform?lang=es&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">Español</a>
+                <li id="listEsp" class="item active w-100">
+                <a @click="changeLang('es')" :href="'#/form?lang=es&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
                 </li>
                 <li id="listEng" class="item w-100">
-                    <a @click="changeLang('en')" :href="'#/busquedaform?lang=en&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">Inglés</a>
+                <a @click="changeLang('en')" :href="'#/form?lang=en&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.INGLES}}</a>
                 </li>
-                <li class="item w-100">
-                    <a href="{URL_LANG_3}" class="btn btn-reset text text-uppercase p-1">{LANG_3}</a>
+                <li id="listDe" class="item w-100">
+                <a @click="changeLang('de')" :href="'#/form?lang=de&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ALEMAN}}</a>
+                </li>
+                <li id="listFr" class="item w-100">
+                <a @click="changeLang('fr')" :href="'#/form?lang=fr&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.FRANCES}}</a>
                 </li>
             </ul>
         </div>
-        <!-- FIN SELECTOR IDIOMÁTICO-->
 
   </div>
 </template>
@@ -251,12 +274,14 @@ export default {
     getReserva() {
         this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.data.hotel + "&Localizador=" + this.data.localizador + "&FechaEntrada=" + this.data.fecha_entrada + "&FechaSalida=" + this.data.fecha_salida + "&Apellido=" + this.data.primer_apellido)
         .then(response => {
-
-            if (response.data.LSReservas.length === 0) {
-                this.reserva_not_found = true;
-            } else {
+            
+            if (response.data.LSReservas.length === 1) {
                 this.reserva_not_found = false;               
                 this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + this.data.fecha_entrada + "&fechasalida=" + this.data.fecha_salida + "&apellido=" + this.data.primer_apellido)
+            } else if (response.data.LSReservas.length > 1) {
+                this.$router.push("reservas?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + this.data.fecha_entrada + "&fechasalida=" + this.data.fecha_salida + "&apellido=" + this.data.primer_apellido)
+            } else {
+                this.reserva_not_found = true;
             }
 
         }).catch(error => {

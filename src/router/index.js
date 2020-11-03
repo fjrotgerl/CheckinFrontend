@@ -8,6 +8,7 @@ import Busqueda      from '../views/Busqueda.vue'
 import BusquedaForm  from '../views/BusquedaForm.vue'
 import NuevoUsuario  from '../views/NuevoUsuario.vue'
 import ListaUsuarios from '../views/ListaUsuarios.vue'
+import ListaReservas from '../views/ListaVariasReservas.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ Vue.use(VueRouter)
     path: '/nuevousuario',
     name: 'Nuevo usuario',
     component: NuevoUsuario
+  },
+  {
+    path: '/reservas',
+    name: 'Reservas',
+    component: ListaReservas
   },
   {
     path: '/about',

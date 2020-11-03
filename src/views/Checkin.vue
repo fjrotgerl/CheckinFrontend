@@ -1,4 +1,4 @@
-<template>
+<template style="overflow: hidden">
   <div>
     <h1>Checkin</h1>
 
@@ -15,17 +15,15 @@
     <button class="button" @click="confirmCheckin">Confirmar</button> 
     <!-- ------------------------------------ -->
 
-    <div>
-        <input type="checkbox" v-model="show">
-        <select v-model="src" style="width: 30em">
-            <option v-for="item in pdfList" :value="item" v-text="item" v-bind:key="item"></option>
-        </select>
-        <input v-model.number="page" type="number" style="width: 7em"> /{{numPages}}
-        <button @click="updateClientData()">CONFIRMAR RESERVA</button>
-        <div style="width: 600px;">
-            <div v-if="loadedRatio > 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
-            <pdf v-if="show" ref="pdf" style="border: 1px solid red" :src="src" :page="page" :rotate="rotate" @password="password" @progress="loadedRatio = $event" @error="error" @num-pages="numPages = $event" @link-clicked="page = $event"></pdf>
+    <div id="test" style=" width: 700px; height: 800px; overflow: scroll; overflow-x: hidden">
+      <div v-for="pdf in pdfList" v-bind:key="pdf">
+        <div v-if="$route.query.id == 1" >
+          <iframe seamless='seamless' frameborder="0" scrolling="yes"  :src="'ficheros/' + pdf + 'eng_txt.txt'" ></iframe>
         </div>
+        <div v-if="$route.query.id != 1 && !pdf.includes('Doc_1')">
+          <iframe :src="'ficheros/' + pdf + 'eng_txt.txt'" ></iframe>
+        </div>
+      </div>
     </div>
 
 
@@ -52,23 +50,47 @@
 <script>
 import json from './../static/config/lang.json'
 import profilesJson from './../static/config/profiles.json'
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import pdf from 'vue-pdf'
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 
 
 export default {
   name: "Checkin",
-  components: {
-    pdf: pdf
-  },
   data() {
     return {
       show: true,
-      pdfList: [
-        'http://www.pdf995.com/samples/pdf.pdf',
+      pdfList: [],
+      pdfList2: [
+        'Doc_1_H00_1_eng_txt.txt',
+        'Doc_1_H00_1_esp_txt.txt',
+        'Doc_1_H00_1_fra_txt.txt',
+        'Doc_1_H00_1_ger_txt.txt',
+        'Doc_1_H20_1_eng_txt.txt',
+        'Doc_1_H20_1_esp_txt.txt',
+        'Doc_1_H20_1_fra_txt.txt',
+        'Doc_1_H20_1_ger_txt.txt',
+        'Doc_1_H21_1_eng_txt.txt',
+        'Doc_1_H21_1_esp_txt.txt',
+        'Doc_1_H21_1_fra_txt.txt',
+        'Doc_1_H21_1_ger_txt.txt',
+        'Doc_1_H22_1_eng_txt.txt',
+        'Doc_1_H22_1_esp_txt.txt',
+        'Doc_1_H22_1_fra_txt.txt',
+        'Doc_1_H22_1_ger_txt.txt',
+        'Doc_1_H25_1_eng_txt.txt',
+        'Doc_1_H25_1_esp_txt.txt',
+        'Doc_1_H25_1_fra_txt.txt',
+        'Doc_1_H25_1_ger_txt.txt',
+        'Doc_2_H00_2_eng_txt.txt',
+        'Doc_2_H00_2_esp_txt.txt',
+        'Doc_2_H00_2_fra_txt.txt',
+        'Doc_2_H00_2_ger_txt.txt',
+        'Doc_3_HBL_3_eng_txt.txt',
+        'Doc_3_HBL_3_esp_txt.txt',
+        'Doc_3_HBL_3_fra_txt.txt',
+        'Doc_3_HBL_3_ger_txt.txt',
+        'policia_eng_txt.txt',
+        'policia_esp_txt.txt',
+        'policia_fra_txt.txt',
+        'policia_ger_txt.txt'
       ],
       src:'',
       loadedRatio: 0,
@@ -110,6 +132,7 @@ export default {
       actualLang: "es",
       textValues: {},
       profiles: profilesJson,
+      hotelsData: "",
       style: {},
       client_data: {},
       api_url: "",
@@ -122,14 +145,6 @@ export default {
     }
   },
   methods: {
-    password: function(updatePassword, reason) {
- 
-            updatePassword(prompt('password is "test"'));
-        },
-        error: function(err) {
- 
-            console.log(err);
-        },
     getReserva() {
     //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
       this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
@@ -218,12 +233,14 @@ export default {
         this.style = profilesJson.default.style;
         this.actualProfile = "default";
         this.api_url = profilesJson.default.api_url;
+        this.pdfList = profilesJson.default.hotels[0].docs;
       } 
 
       if (this.$route.query.profile === "other") {
         this.style = profilesJson.other.style;
         this.actualProfile = "other";
         this.api_url = profilesJson.other.api_url;
+        this.pdfList = profilesJson.others.hotels[0].docs;
       } 
     },
 
@@ -302,24 +319,20 @@ export default {
     } else if (this.$route.query.lang === "en") {
       document.getElementById("listEng").classList.add("active");
     }
-
   }
 }
 </script>
 
 <style scoped>
-html body {
-    padding: 0px;
-    margin: 0px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #myCanvas {
   border: 1px solid grey;
 }
 
-.center-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 </style>

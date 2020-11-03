@@ -16,24 +16,15 @@
                         </a>
                     </div>
                     <div class="w-100">
-                        <div v-for="cliente in customersWithConfirmation" v-bind:key="cliente.data.NumeroCliente">
+                        <div v-for="cliente in customersData" v-bind:key="cliente.Reserva">
                             <div class="b-user col-12 mb-3 d-flex flex-wrap align-items-center pr-0" :style="'background-color: ' + style.COLOR_TEXTO_BOTON + ';'">
-                                <div v-if="cliente.completado">
-                                    <i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-check icon-size-1-4 mr-3"></i>
-                                </div>
-                                <div v-else>
-                                    <i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-times icon-size-1-4 mr-3"></i>
-                                </div>
                                 
-                                <div v-if="cliente.data.Nombre != ''">
-                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
-                                </div>
-                                <div v-else>
-                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>Cliente pendiente a rellenar</p>
+                                <div>
+                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>{{cliente.LSReservaHabAWA[0].LSReservaCliente[0].Nombre + " " + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido1 + " " + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido2}}</p>
                                 </div>
                                 
                                 <div class="actions d-flex ml-auto">
-                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido + '&id=' + cliente.data.NumeroCliente)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-pen"></i></button>
+                                    <button @click="$router.push('listausuarios?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + cliente.HotelFactura + '&localizator=' + cliente.Localizador + '&fechaentrada=' + cliente.LSReservaHabAWA[0].FechaEntrada + '&fechasalida=' + cliente.LSReservaHabAWA[0].FechaSalida + '&apellido=' + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido1)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-angle-left "></i></button>
                                     <!-- <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button> -->
                                 </div>
                             </div>
@@ -42,9 +33,6 @@
                         <!-- <div class="form-group col-12 px-0">
                             <button @click="$router.push('/nuevousuario')" type="button" class="btn btn-solid btn-block text" style="background-color: {COLOR_BOTON_AÑADIRNUEVO}; color: {COLOR_TEXT};">{{textValues.AGREGAR_NUEVO_USUARIO}}</button>
                         </div> -->
-                        <div class="form-group col-12 px-0">
-                            <button type="button" class="btn btn-solid btn-block text" :style="'background-color: ' + this.style.COLOR_BOTON + '; color: ' + this.style.COLOR_TEXTO_BOTON + ';'">{{textValues.TERMINAR}}</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -199,12 +187,10 @@ export default {
     methods: {
         getReserva() {
             //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
-            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
+            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
                 .then(response => {
-                    console.log(response.data)
-                    this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
+                    this.customersData = response.data.LSReservas;
                     console.log(response.data);
-                    this.isReservaComplete();
                 }).catch(error => {
                     console.log(error)
                 });
@@ -221,19 +207,6 @@ export default {
                 document.getElementById("listEng").classList.add("active");
             }  
         },
-
-        isReservaComplete() {
-
-            this.customersData.forEach(client => {
-                if (client.AceptaInfo === true && client.Apellido1 != "" && client.Email != "" && client.Edad != "" && client.DC.Provincia != ""
-                && client.IDDocumento != "" && client.Nombre != "" && client.DC.Pais != "" && client.DC.Telefono != "" && client.TipoDocumento != "") {
-                    this.customersWithConfirmation.push({ 'completado': true, 'data': client });
-                } else {
-                    this.customersWithConfirmation.push({ 'completado': false, 'data': client });
-                }
-            });
-
-        }
     },
 
     created() {

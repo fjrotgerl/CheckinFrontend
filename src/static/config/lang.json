@@ -7,6 +7,7 @@
         "PLACEHOLDER_LOCALIZADOR": "Localizador",
         "MENSAJE_ERROR": "Faltan campos a rellenar",
         "TEXTO_BOTON_ENVIAR": "Enviar",
+        "TEXTO_BOTON_SIGUIENTE": "Siguiente",
         "MENSAJE_DATO_OBLIGATORIO": "Dato obligatorio",
         "AGREGAR_NUEVO_USUARIO": "Agregar un nuevo cliente",
         "TERMINAR": "Finalizar",
@@ -37,7 +38,7 @@
         "INGLES": "INGLÉS",
         "ALEMAN": "ALEMÁN",
         "FRANCES": "FRANCES",
-        "CONSENTIMIENTO_RECIBIR_NOTIFICANCIONES": "No presto mi consentimiento a recibir comunicaciones personalizadas de Alua Hotels",
+        "CONSENTIMIENTO_RECIBIR_NOTIFICANCIONES": "Presto mi consentimiento a recibir comunicaciones personalizadas de Alua Hotels",
         "MENSAJE_ERROR_FALTA_NOMBRE": "Introduce el nombre",
         "MENSAJE_ERROR_FALTA_PRIMER_APELLIDO": "Introduce el primer apellido",
         "MENSAJE_ERROR_FALTA_FECHA_NACIMIENTO": "Introduce la fecha de nacimiento",
@@ -48,7 +49,8 @@
         "MENSAJE_ERROR_FALTA_FECHA_EXPEDICION": "Introduce la fecha de expedición",
         "MENSAJE_ERROR_FALTA_PAIS_RESIDENCIA": "Introduce el país de residencia",
         "MENSAJE_ERROR_FALTA_ACEPTAR_INFO": "Por favor, acepta recibir notificacinoes de Alua",
-        "MENSAJE_ERROR_FALTA_EMAIL": "Introduce tu dirección de correo electrónico"
+        "MENSAJE_ERROR_FALTA_EMAIL": "Introduce tu dirección de correo electrónico",
+        "BOTON_SELECCIONAR": "Seleccionar"
     },
 
     "en": {

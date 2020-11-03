@@ -90,46 +90,9 @@
               <!-- ------------------------------------------------ -->
               <div class="c-calendar form-group col-12 col-md-6 reservas__entrada">
                 <!-- ADULTO -->
-                <div v-if="data.tipo_persona === 0">
+                <div>
                   <date-picker
                     v-model="data.fecha_nacimiento"
-                    :available-dates='{ start: null, end: new Date().setFullYear(new Date().getFullYear() - 18) }'
-                    :input-props='{
-                      placeholder: this.textValues.FECHA_NACIMIENTO,
-                      readonly: true
-                    }'
-                  />
-                </div>
-
-                <!-- JOVEN -->
-                <div v-if="data.tipo_persona === 1">
-                  <date-picker
-                    v-model="data.fecha_nacimiento"
-                    :available-dates='{ start: new Date().setFullYear(new Date().getFullYear() - 12), end: new Date() }'
-                    :input-props='{
-                      placeholder: this.textValues.FECHA_NACIMIENTO,
-                      readonly: true
-                    }'
-                  />
-                </div>
-
-                <!-- NIÑO -->
-                <div v-if="data.tipo_persona === 2">
-                  <date-picker
-                    v-model="data.fecha_nacimiento"
-                    :available-dates='{ start: new Date().setFullYear(new Date().getFullYear() - 8), end: new Date() }'
-                    :input-props='{
-                      placeholder: this.textValues.FECHA_NACIMIENTO,
-                      readonly: true
-                    }'
-                  />
-                </div>
-
-                <!-- CUNA -->
-                <div v-if="data.tipo_persona === 3">
-                  <date-picker
-                    v-model="data.fecha_nacimiento"
-                    :available-dates='{ start: new Date().setFullYear(new Date().getFullYear() - 1), end: new Date() }'
                     :input-props='{
                       placeholder: this.textValues.FECHA_NACIMIENTO,
                       readonly: true
@@ -524,12 +487,6 @@ export default {
         } else {
           this.error_cases.pais_nacimiento = false;
         }
-        
-        if (this.data.acepta_terminos === false) {
-          this.error_cases.aceptar_info = true;
-        } else {
-          this.error_cases.aceptar_info = false;
-        }
 
         if (this.data.acepta_terminos === true && this.data.email === "") {
           this.error_cases.email = true;
@@ -538,7 +495,7 @@ export default {
         }
 
         if (this.data.nombre != "" && this.data.primer_apellido != "" && this.data.fecha_nacimiento != "" && this.data.sexo != "" && this.data.tipo_doc != "" && this.data.num_documento != "" 
-        && this.data.fecha_entrada != "" && this.data.pais != "" && this.data.acepta_terminos === true && this.data.email != "") {
+        && this.data.fecha_entrada != "" && this.data.pais != "" && this.data.email != "") {
           this.error_cases.nombre           = false;
           this.error_cases.primer_apellido  = false;
           this.error_cases.fecha_nacimiento = false;
