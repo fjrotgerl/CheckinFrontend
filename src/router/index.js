@@ -1,10 +1,8 @@
 import Vue           from 'vue'
 import VueRouter     from 'vue-router'
-import Home          from '../views/Home.vue'
 import Formulario    from '../views/Formulario.vue'
 import Clientes      from '../views/Tablas.vue'
 import Checkin       from '../views/Checkin.vue'
-import Busqueda      from '../views/Busqueda.vue'
 import BusquedaForm  from '../views/BusquedaForm.vue'
 import NuevoUsuario  from '../views/NuevoUsuario.vue'
 import ListaUsuarios from '../views/ListaUsuarios.vue'
@@ -14,9 +12,12 @@ Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/', redirect: '/busqueda?lang=es&profile=default'
+  },
+  {
+    path: '/busqueda',
+    name: 'Busqueda',
+    component: BusquedaForm
   },
   {
     path: '/form',
@@ -32,16 +33,6 @@ Vue.use(VueRouter)
     path: '/checkin',
     name: 'Checkin',
     component: Checkin
-  },
-  {
-    path: '/busqueda',
-    name: 'Busqueda',
-    component: Busqueda
-  },
-  {
-    path: '/busquedaform',
-    name: 'Busqueda',
-    component: BusquedaForm
   },
   {
     path: '/listausuarios',

@@ -2,7 +2,7 @@
     "default": {
         "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
         "style": {
-            "URL_IMAGEN_FONDO": "/img/fondo_alua.074837cc.jpg",
+            "URL_IMAGEN_FONDO": "https://picsum.photos/1500/700?random&#x3D;1",
             "URL_LOGO_MARCA": "https://www.aluahotels.com/uploads/logoshotel/svg/logo-alua-header.svg",
             "COLOR_FONDO_CUADRO_FORMULARIO": "#00a5b1",
             "COLOR_BOTON": "#006682",

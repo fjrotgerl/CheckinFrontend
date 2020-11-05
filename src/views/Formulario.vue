@@ -16,104 +16,6 @@
             <form class="form d-flex flex-wrap">
 
               <!-- ------------------------------------------------ -->
-              <!-- TIPO DOCUMENTO -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <select name="tipo_doc" v-model="data.tipo_doc">
-                  <option value="" selected disabled>{{this.textValues.TIPO_DOCUMENTO}}</option>
-                  <option v-for="item in tipos_documento" v-bind:key="item" :value="item">{{item}}</option>
-                </select>
-              </div>
-              
-              <!-- ------------------------------------------------ -->
-              <!-- NUMERO DOCUMENTO -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <input v-model="data.num_documento" type="text" class="form-control text" :placeholder="this.textValues.NUM_DOCUMENTO">
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- FECHA EXPEDICION -->
-              <!-- ------------------------------------------------ -->
-              <div class="c-calendar form-group col-12 col-md-6 reservas__entrada">
-                <date-picker
-                  v-model="data.fecha_expedicion"
-                  :input-props='{
-                    placeholder: this.textValues.FECHA_EXPEDICION,
-                    readonly: true
-                  }'
-                />
-                <!-- <p for="" class="text label">{{this.textValues.PLACEHOLDER_FECHA_ENTRADA}}</p>
-                <div class="date text--date form-control d-lg-flex flex-lg-wrap mb-0 entrada text">
-                <span class="item dia text"></span>
-                <span class="item mes text"></span>
-                <span class="item anio text"></span>              
-                </div> -->
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- NACIONALIDAD -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <select name="pais" v-model="data.pais_nacimiento">
-                  <option value="" selected disabled>{{this.textValues.NACIONALIDAD}}</option>
-                  <option v-for="pais in paises" v-bind:key="pais.code" :value="pais.code">{{pais.name}}</option>
-                </select>
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- PAIS RESIDENCIA -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <select name="fecha_expedicion" v-model="data.pais">
-                  <option value="" selected disabled>{{this.textValues.PAIS_RESIDENCIA}}</option>
-                  <option v-for="pais in paises" v-bind:key="pais.code" :value="pais.code">{{pais.name}}</option>
-                </select>
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- EMAIL -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <input v-model="data.email" type="text" class="form-control text" :placeholder="this.textValues.EMAIL">
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- TELEFONO -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <input v-model="data.number" type="text" class="form-control text" :placeholder="this.textValues.TELEFONO">
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- FECHA NACIMIENTO -->
-              <!-- ------------------------------------------------ -->
-              <div class="c-calendar form-group col-12 col-md-6 reservas__entrada">
-                <!-- ADULTO -->
-                <div>
-                  <date-picker
-                    v-model="data.fecha_nacimiento"
-                    :input-props='{
-                      placeholder: this.textValues.FECHA_NACIMIENTO,
-                      readonly: true
-                    }'
-                  />
-                </div>
-                
-              </div>
-
-              <!-- ------------------------------------------------ -->
-              <!-- SEXO -->
-              <!-- ------------------------------------------------ -->
-              <div class="form-group col-12 col-md-6">
-                <select name="sexo" v-model="data.sexo">
-                  <option value="" disabled selected>{{this.textValues.SEXO}}</option>
-                  <option value="hombre">Hombre</option>
-                  <option value="hombre">Mujer</option>
-                </select>
-              </div>
-
-              <!-- ------------------------------------------------ -->
               <!-- NOMBRE -->
               <!-- ------------------------------------------------ -->
               <div class="form-group col-12 col-md-6">
@@ -132,6 +34,113 @@
               <!-- ------------------------------------------------ -->
               <div class="form-group col-12 col-md-6">
                 <input v-model="data.segundo_apellido" type="text" class="form-control text" :placeholder="this.textValues.SEGUNDO_APELLIDO">
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- TIPO DOCUMENTO -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <select name="tipo_doc" v-model="data.tipo_doc">
+                  <option value="" selected disabled hidden>{{this.textValues.TIPO_DOCUMENTO}}</option>
+                  <option value="DNI" >DNI</option>
+                  <option value="NIF" >NIF</option>
+                  <option value="PASAPORTE" >{{this.textValues.PASAPORTE}}</option>
+                </select>
+              </div>
+              
+              <!-- ------------------------------------------------ -->
+              <!-- NUMERO DOCUMENTO -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <input v-model="data.num_documento" type="text" class="form-control text" :placeholder="this.textValues.NUM_DOCUMENTO">
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- FECHA EXPEDICION -->
+              <!-- ------------------------------------------------ -->
+              <div class="c-calendar form-group col-12 col-md-6 reservas__entrada">
+                <date-picker
+                  v-model="data.fecha_expedicion"
+                  :locale="textValues.CALENDAR_IDIOMA"
+                  :input-props='{
+                    placeholder: this.textValues.FECHA_EXPEDICION,
+                    readonly: true
+                  }'
+                  :model-config="modelConfig"                  
+                />
+                <!-- <p for="" class="text label">{{this.textValues.PLACEHOLDER_FECHA_ENTRADA}}</p>
+                <div class="date text--date form-control d-lg-flex flex-lg-wrap mb-0 entrada text">
+                <span class="item dia text"></span>
+                <span class="item mes text"></span>
+                <span class="item anio text"></span>              
+                </div> -->
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- NACIONALIDAD -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <label for="" class="sr-only"></label>
+                <select name="pais" v-model="data.pais_nacimiento">
+                  <option value="" selected disabled hidden>{{this.textValues.NACIONALIDAD}}</option>
+                  <option v-for="pais in paises" v-bind:key="pais.name" :value="pais.name">{{pais.name}}</option>
+                </select>
+              </div>
+              
+
+              <!-- ------------------------------------------------ -->
+              <!-- PAIS RESIDENCIA -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <select name="fecha_expedicion" v-model="data.pais">
+                  <option value="" selected disabled hidden>{{this.textValues.PAIS_RESIDENCIA}}</option>
+                  <option v-for="pais in paises" v-bind:key="pais.name" :value="pais.name">{{pais.name}}</option>
+                </select>
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- EMAIL -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <input v-model="$v.data.email.$model" type="text" :class="status($v.data.email) + ' form-control text'" :placeholder="this.textValues.EMAIL">
+                <div class="error" v-if="!$v.data.email.email">{{this.textValues.MENSAJE_ERROR_FALTA_EMAIL}}</div>
+              </div>
+              
+
+              <!-- ------------------------------------------------ -->
+              <!-- TELEFONO -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <input v-model="data.telefono" type="text" class="form-control text" :placeholder="this.textValues.TELEFONO">
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- FECHA NACIMIENTO -->
+              <!-- ------------------------------------------------ -->
+              <div class="c-calendar form-group col-12 col-md-6 reservas__entrada">
+                <!-- ADULTO -->
+                <div>
+                  <date-picker
+                    v-model="data.fecha_nacimiento"
+                    :locale="textValues.CALENDAR_IDIOMA"
+                    :input-props='{
+                      placeholder: this.textValues.FECHA_NACIMIENTO,
+                      readonly: true
+                    }'
+                  />
+                </div>
+                
+              </div>
+
+              <!-- ------------------------------------------------ -->
+              <!-- SEXO -->
+              <!-- ------------------------------------------------ -->
+              <div class="form-group col-12 col-md-6">
+                <select class="form-control text" v-model="data.sexo">
+                  <option value="" disabled selected hidden>{{this.textValues.SEXO}}</option>
+                  <option value="0">{{this.textValues.HOMBRE}}</option>
+                  <option value="1">{{this.textValues.MUJER}}</option>
+                </select>
               </div>
 
               <!-- ------------------------------------------------ -->
@@ -168,8 +177,8 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <p class="text mb-2" style="color: #ffffff;">(*) opcional</p>
-                    <p class="text" style="color: #ffffff;">(**) opcional</p>
+                    <p class="text mb-2" style="color: #ffffff;">(*) {{this.textValues.OPCIONAL}}</p>
+                    <p class="text" style="color: #ffffff;">(**) {{this.textValues.OPCIONAL}}</p>
                 </div>
 
                 <!-- ------------------------------------------------ -->
@@ -186,7 +195,7 @@
                   <p v-if="error_cases.fecha_expedicion" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_FECHA_EXPEDICION}}</p>
                   <p v-if="error_cases.pais_residencia" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_PAIS_RESIDENCIA}}</p>
                   <p v-if="error_cases.email" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_EMAIL}}</p>
-                  <p v-if="error_cases.aceptar_info" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_ACEPTAR_INFO}}</p>
+                  <p v-if="error_cases.acepta_terminos" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_ACEPTAR_INFO}}</p>
                 </div>
 
                 <div class="form-group col-12 col-md-6">
@@ -196,7 +205,7 @@
 
                 <div class="form-group col-12 col-md-6">
                     <label for="" class="sr-only"></label>
-                    <button type="button" class="btn disable btn-solid text-uppercase btn-block text" style="background-color: #006682; color: #ffffff; ">{{this.textValues.SALIR}}</button>
+                    <button @click="goBack()" type="button" class="btn btn-solid text-uppercase btn-block text" style="background-color: #006682; color: #ffffff; ">{{this.textValues.SALIR}}</button>
                 </div>
 
             </form>
@@ -269,7 +278,7 @@
 <div class="c-menu-lenguage position-fixed bg p-2 position position-z-1" style="background-color: #ffffff;">
     <i class="icon fas fa-angle-down"></i>
     <ul class="menu list-none mb-0">
-        <li id="listEsp" class="item active w-100">
+        <li id="listEsp" class="item w-100">
           <a @click="changeLang('es')" :href="'#/form?lang=es&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
         </li>
         <li id="listEng" class="item w-100">
@@ -291,14 +300,19 @@
 import paisesJson from '../assets/paises'
 import json from './../static/config/lang.json'
 import profilesJson from './../static/config/profiles.json'
+import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "Formulario",
   data() {
     return {
+      modelConfig: {
+        type: 'string',
+        mask: 'YYYY-MM-DDTHH:mm:ss',
+      },
+      sexo: "",
       paises: paisesJson,
       isFormComplete: false,
-      tipos_documento: ["DNI", "NIF", "Pasaporte"],
       error_cases: {
         nombre: false,
         primer_apellido: false,
@@ -313,28 +327,28 @@ export default {
         email: false
       },
       data: {
-        "reserva_id": "",
-        "fecha_entrada": "",
-        "fecha_salida": "",
-        "habitacion": "",
-        "num_documento": "",
-        "tipo_doc": "",
-        "fecha_expedicion": "",
-        "pais": "",
-        "email": "",
-        "telefono": "",
-        "fecha_nacimiento": "",
-        "sexo": "",
-        "direccion": "",
-        "nombre": "",
-        "poblacion": "",
-        "provincia": "",
-        "codigo_postal": "",
-        "primer_apellido": "",
-        "segundo_apellido": "",
-        "tipo_persona": "",
-        "acepta_terminos": false,
-        "pais_nacimiento": ""
+        reserva_id: "",
+        fecha_entrada: "",
+        fecha_salida: "",
+        habitacion: "",
+        num_documento: "",
+        tipo_doc: "",
+        fecha_expedicion: new Date(),
+        pais: "",
+        email: "",
+        telefono: 0,
+        fecha_nacimiento: new Date(),
+        sexo: "",
+        direccion: "",
+        nombre: "",
+        poblacion: "",
+        provincia: "",
+        codigo_postal: "",
+        primer_apellido: "",
+        segundo_apellido: "",
+        tipo_persona: "",
+        acepta_terminos: false,
+        pais_nacimiento: ""
       },
       dataForRequest: {
         hotel: this.$route.query.hotel,
@@ -372,6 +386,7 @@ export default {
       actualProfile: "default",
       actualLang: "es",
       textValues: {},
+      tipos_documento: ["DNI","NIF"],
       profiles: profilesJson,
       style: {},
       client_data: {},
@@ -431,7 +446,24 @@ export default {
       }
     },
 
+    validations: {
+        data: {
+          email: {
+            email
+          }
+        }
+      },
+
     methods: {
+      status(validation) {
+          return {
+          error: validation.$error,
+          dirty: validation.$dirty
+        }
+      },
+      goBack() {
+        this.$router.push('listausuarios?lang=' + this.$route.query.lang + '&profile=' + this.$route.query.profile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id)
+      },
       checkForm() {
 
         if (this.data.nombre === "") {
@@ -458,7 +490,7 @@ export default {
           this.error_cases.pais_nacimiento = false;
         }
 
-        if (this.data.sexo === "") {
+        if (this.data.sexo != 0 && this.data.sexo != 1) {
           this.error_cases.sexo = true;
         } else {
           this.error_cases.sexo = false;
@@ -483,23 +515,30 @@ export default {
         }
 
         if (this.data.pais === "") {
-          this.error_cases.pais_nacimiento = true;
+          this.error_cases.pais_residencia = true;
         } else {
-          this.error_cases.pais_nacimiento = false;
+          this.error_cases.pais_residencia = false;
         }
 
-        if (this.data.acepta_terminos === true && this.data.email === "") {
-          this.error_cases.email = true;
+        if (this.data.acepta_terminos === false) {
+          this.error_cases.acepta_terminos = true;
         } else {
-          this.error_cases.email = false;
+          this.error_cases.acepta_terminos = false;
         }
 
-        if (this.data.nombre != "" && this.data.primer_apellido != "" && this.data.fecha_nacimiento != "" && this.data.sexo != "" && this.data.tipo_doc != "" && this.data.num_documento != "" 
-        && this.data.fecha_entrada != "" && this.data.pais != "" && this.data.email != "") {
+        // if (this.data.acepta_terminos === true && this.data.email === "") {
+        //   this.error_cases.email = true;
+        // } else {
+        //   this.error_cases.email = false;
+        // }
+
+        if (this.data.nombre != "" && this.data.primer_apellido != "" && this.data.fecha_nacimiento != "" && (this.data.sexo == 0 || this.data.sexo == 1) && this.data.tipo_doc != "" && this.data.num_documento != "" 
+        && this.data.fecha_entrada != "" && this.data.pais != "" && this.data.acepta_terminos == true) {
           this.error_cases.nombre           = false;
           this.error_cases.primer_apellido  = false;
           this.error_cases.fecha_nacimiento = false;
           this.error_cases.pais_nacimiento  = false;
+          this.error_cases.pais_residencia  = false;
           this.error_cases.sexo             = false;
           this.error_cases.tipo_doc         = false;
           this.error_cases.num_documento    = false;
@@ -507,12 +546,11 @@ export default {
           this.error_cases.pais             = false;
           this.error_cases.aceptar_info     = false;
           this.error_cases.email            = false;
+          this.error_cases.acepta_terminos  = false;
 
           this.goSign();
         }
 
-        console.log(this.data)
-        console.log(this.error_cases)
       },
       getReserva() {
         //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
@@ -522,33 +560,39 @@ export default {
           let json = response.data;
           let clienteId = this.$route.query.id - 1;
           this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId];
-          let dc = this.customersData.DC;
+
           this.data = {
-            "reserva_id": this.client_data.LSReservas[0].Reserva,
-            "fecha_entrada": this.client_data.LSReservas[0].LSReservaHabAWA[0].FechaEntrada,
-            "fecha_salida": this.client_data.LSReservas[0].LSReservaHabAWA[0].FechaSalida,
-            "habitacion": this.client_data.LSReservas[0].LSReservaHabAWA[0].Habitacion,
-            "num_documento": this.customersData.IDDocumento,
-            "tipo_doc": this.customersData.TipoDocumento,
-            "fecha_expedicion": this.customersData.FechaExpedicion,
-            "pais": dc.Pais,
-            "email": this.customersData.EMail,
-            "telefono": dc.Telefono,
-            "fecha_nacimiento": this.customersData.FechaNacimiento,
-            "sexo": this.customersData.Sexo,
-            "direccion": dc.Direccion,
-            "nombre": this.customersData.Nombre,
-            "poblacion": dc.Poblacion,
-            "provincia": dc.Provincia,
-            "codigo_postal": this.customersData.CodigoPostal,
-            "primer_apellido": this.customersData.Apellido1,
-            "segundo_apellido": this.customersData.Apellido2,
-            "acepta_terminos": this.customersData.AceptaInfo,
-            "numero_cliente": this.customersData.NumeroCliente,
-            "tipo_persona": this.customersData.TipoPersona
+            reserva_id: this.client_data.LSReservas[0].Reserva,
+            fecha_entrada: this.client_data.LSReservas[0].LSReservaHabAWA[0].FechaEntrada,
+            fecha_salida: this.client_data.LSReservas[0].LSReservaHabAWA[0].FechaSalida,
+            habitacion: this.client_data.LSReservas[0].LSReservaHabAWA[0].Habitacion,
+            num_documento: this.customersData.IDDocumento,
+            tipo_doc: this.customersData.TipoDocumento,
+            fecha_expedicion: new Date(this.customersData.FechaExpedicion),
+            email: this.customersData.EMail,
+            fecha_nacimiento: new Date(this.customersData.FechaNacimiento),
+            sexo: this.customersData.Sexo,
+            nombre: this.customersData.Nombre,
+            primer_apellido: this.customersData.Apellido1,
+            segundo_apellido: this.customersData.Apellido2,
+            acepta_terminos: this.customersData.AceptaInfo,
+            numero_cliente: this.customersData.NumeroCliente,
+            tipo_persona: this.customersData.TipoPersona,
+            pais_nacimiento: this.customersData.PaisNacimiento,
+
+            direccion: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.Direccion,
+            pais: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.Pais,
+            codigo_postal: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.CodigoPostal,
+            poblacion: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.Poblacion,
+            provincia: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.Provincia,
+            telefono: response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente[clienteId].DC.Telefono,
           }
-          console.log(this.data)
-        }).catch(error => {
+        })
+        .then(() => {
+          if (this.data.fecha_expedicion < new Date('1900-01-01')) {this.data.fecha_expedicion = new Date('2000-01-01')}
+          if (this.data.fecha_nacimiento < new Date('1900-01-01')) { this.data.fecha_nacimiento = new Date('2000-01-01')}
+        })
+        .catch(error => {
             console.log(error)
           });
         },
@@ -578,6 +622,17 @@ export default {
         },
 
         goSign() {
+          let dayEx = new Date(this.data.fecha_expedicion).getDate();
+          let monthEx = new Date(this.data.fecha_expedicion).getMonth() + 1;
+          let yearEx = new Date(this.data.fecha_expedicion).getFullYear();
+
+          let dayNa = new Date(this.data.fecha_nacimiento).getDate();
+          let monthNa = new Date(this.data.fecha_nacimiento).getMonth() + 1;
+          let yearNa = new Date(this.data.fecha_nacimiento).getFullYear();
+
+          this.data.fecha_expedicion = yearEx + "-" + (monthEx < 10 ? '0' + monthEx : monthEx) + "-" + (dayEx < 10 ? '0' + dayEx : dayEx) + 'T00:00:00';
+          this.data.fecha_nacimiento = yearNa + "-" + (monthNa < 10 ? '0' + monthNa : monthNa) + "-" + (dayNa < 10 ? '0' + dayNa : dayNa) + 'T00:00:00';
+          localStorage.clear();
           localStorage.data = JSON.stringify(this.data);
           this.$router.push("/checkin?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.$route.query.hotel + "&localizator=" + this.$route.query.localizator + "&fechaentrada" + this.$route.query.fechaentrada + "&fechasalida=" + this.$route.query.fechasalida + "&apellido=" + this.$route.query.apellido + "&id=" + this.$route.query.id);
         }
@@ -636,6 +691,16 @@ input, select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.dirty {
+  border-color: #5A5;
+  background: #EFE;
+}
+
+.error {
+  border-color: red;
+  background: #FDD;
 }
 
 </style>

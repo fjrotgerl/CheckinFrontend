@@ -20,6 +20,7 @@
                         <div class="form-group col-12 col-md-6">
                             <label for="" class="sr-only"></label>
                             <select class="form-control text" required :data-msg="this.textValues.MENSAJE_DATO_OBLIGATORIO" v-model="data.hotel">
+                                <option value="" disabled selected hidden>{{this.textValues.SELECCIONAR_HOTEL}}</option>
                                 <option v-for="hotel in hotels" :value="hotel.id" v-bind:key="hotel.id">
                                 {{hotel.value}}
                                 </option>
@@ -34,6 +35,7 @@
                             <!-- <input type="text" name="fecha_entrada" id="fecha_entrada" v-model="data.fecha_entrada"> -->
                             <date-picker
                                 v-model="data.fecha_entrada"
+                                :locale="textValues.CALENDAR_IDIOMA"
                                 :input-props='{
                                     placeholder: this.textValues.PLACEHOLDER_FECHA_ENTRADA,
                                     readonly: true
@@ -55,6 +57,7 @@
                             <!-- <input type="text" name="fecha_salida" id="fecha_salida" v-model="data.fecha_salida"> -->
                             <date-picker
                                 v-model="data.fecha_salida"
+                                :locale="textValues.CALENDAR_IDIOMA"
                                 :input-props='{
                                     placeholder: this.textValues.PLACEHOLDER_FECHA_SALIDA,
                                     readonly: true
@@ -162,16 +165,16 @@
             <i class="icon fas fa-angle-down"></i>
             <ul class="menu list-none mb-0">
                 <li id="listEsp" class="item active w-100">
-                <a @click="changeLang('es')" :href="'#/form?lang=es&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
+                <a @click="changeLang('es')" :href="'#/busqueda?lang=es&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
                 </li>
                 <li id="listEng" class="item w-100">
-                <a @click="changeLang('en')" :href="'#/form?lang=en&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.INGLES}}</a>
+                <a @click="changeLang('en')" :href="'#/busqueda?lang=en&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">{{this.textValues.INGLES}}</a>
                 </li>
                 <li id="listDe" class="item w-100">
-                <a @click="changeLang('de')" :href="'#/form?lang=de&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ALEMAN}}</a>
+                <a @click="changeLang('de')" :href="'#/busqueda?lang=de&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ALEMAN}}</a>
                 </li>
                 <li id="listFr" class="item w-100">
-                <a @click="changeLang('fr')" :href="'#/form?lang=fr&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.FRANCES}}</a>
+                <a @click="changeLang('fr')" :href="'#/busqueda?lang=fr&profile=' + this.actualProfile" class="btn btn-reset text text-uppercase p-1">{{this.textValues.FRANCES}}</a>
                 </li>
             </ul>
         </div>
@@ -209,15 +212,23 @@ export default {
           style: {},
           hotels: {},
           checkLang() {
-              if (this.$route.query.lang === "es") {
-                  this.textValues = json.es
-                  this.actualLang = "es";
-              }
-              if (this.$route.query.lang === "en") {
-                  this.textValues = json.en
-                  this.actualLang = "en";
-              }
-          },
+                if (this.$route.query.lang === "es") {
+                    this.textValues = json.es
+                    this.actualLang = "es";
+                }
+                if (this.$route.query.lang === "en") {
+                    this.textValues = json.en
+                    this.actualLang = "en";
+                }
+                if (this.$route.query.lang === "de") {
+                    this.textValues = json.de
+                    this.actualLang = "de";
+                }
+                if (this.$route.query.lang === "fr") {
+                    this.textValues = json.fr
+                    this.actualLang = "fr";
+                }
+            },
           checkProfile() {
               if (this.$route.query.profile === "default") {
                   this.style = profilesJson.default.style;
@@ -233,15 +244,27 @@ export default {
               } 
           },
           changeLang(lang) {
-              if (lang === "es") {
-                  this.textValues = json.es;
-                  this.toggleBodyClass("langEsp");
-              }
-              if (lang === "en") {
-                  this.textValues = json.en
-                  this.toggleBodyClass("langEng");
-              }
-          },
+            if (lang === "es") {
+                this.textValues = json.es;
+                this.toggleBodyClass("langEsp");
+                this.actualLang = "es";
+            }
+            if (lang === "en") {
+                this.textValues = json.en
+                this.toggleBodyClass("langEng");
+                this.actualLang = "en";
+            }
+            if (lang === "de") {
+                this.textValues = json.de
+                this.toggleBodyClass("langDe");
+                this.actualLang = "de";
+            }
+            if (lang === "fr") {
+                this.textValues = json.fr
+                this.toggleBodyClass("langFr");
+                this.actualLang = "fr";
+            }
+          }
           
       }
   },
@@ -289,14 +312,29 @@ export default {
         });
     },
     toggleBodyClass(langId) {
-        if (langId === "langEsp") {
+          const el = document.body;
+          if (langId === "langEsp") {
             document.getElementById("listEsp").classList.add("active");
             document.getElementById("listEng").classList.remove("active");
-        } if (langId === "langEng") {
+            document.getElementById("listDe").classList.remove("active");
+            document.getElementById("listFr").classList.remove("active");
+          } if (langId === "langEng") {
             document.getElementById("listEsp").classList.remove("active");
+            document.getElementById("listDe").classList.remove("active");
+            document.getElementById("listFr").classList.remove("active");
             document.getElementById("listEng").classList.add("active");
-        }
-    },
+          } if (langId === "langDe") {
+            document.getElementById("listEsp").classList.remove("active");
+            document.getElementById("listEng").classList.remove("active");
+            document.getElementById("listFr").classList.remove("active");
+            document.getElementById("listDe").classList.add("active");
+          } if (langId === "langFr") {
+            document.getElementById("listEsp").classList.remove("active");
+            document.getElementById("listEng").classList.remove("active");
+            document.getElementById("listDe").classList.remove("active");
+            document.getElementById("listFr").classList.add("active");
+          }   
+        },
   },
   created() {
       this.checkLang();
@@ -304,10 +342,14 @@ export default {
   },
   mounted() {
       if (this.$route.query.lang === "es") {
-          document.getElementById("listEsp").classList.add("active");
-      } else if (this.$route.query.lang === "en") {
-          document.getElementById("listEng").classList.add("active");
-      }
+            document.getElementById("listEsp").classList.add("active");
+        } else if (this.$route.query.lang === "en") {
+            document.getElementById("listEng").classList.add("active");
+        } else if (this.$route.query.lang === "de") {
+            document.getElementById("listDe").classList.add("active");
+        } else if (this.$route.query.lang === "fr") {
+            document.getElementById("listFr").classList.add("active");
+        }
   }
  
 }

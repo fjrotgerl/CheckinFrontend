@@ -18,18 +18,17 @@
                     <div class="w-100">
                         <div v-for="cliente in customersWithConfirmation" v-bind:key="cliente.data.NumeroCliente">
                             <div class="b-user col-12 mb-3 d-flex flex-wrap align-items-center pr-0" :style="'background-color: ' + style.COLOR_TEXTO_BOTON + ';'">
-                                <div v-if="cliente.completado">
+                                <!-- <div v-if="cliente.completado">
                                     <i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-check icon-size-1-4 mr-3"></i>
                                 </div>
                                 <div v-else>
                                     <i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-times icon-size-1-4 mr-3"></i>
-                                </div>
-                                
+                                </div> -->
                                 <div v-if="cliente.data.Nombre != ''">
-                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
+                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" :class="'icon ' + (cliente.data.TipoPersona == 0 ? 'fas fa-user fa-lg' : '') + (cliente.data.TipoPersona == 1 ? 'fas fa-user fa-sm' : '') + (cliente.data.TipoPersona == 2 ? 'fas fa-child fa-lg' : '') + (cliente.data.TipoPersona == 3 ? 'fas fa-baby fa-lg' : '') + ' mr-2'"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p>
                                 </div>
                                 <div v-else>
-                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>Cliente pendiente a rellenar</p>
+                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" :class="'icon ' + (cliente.data.TipoPersona == 0 ? 'fas fa-user fa-lg' : '') + (cliente.data.TipoPersona == 1 ? 'fas fa-user fa-sm' : '') + (cliente.data.TipoPersona == 2 ? 'fas fa-child fa-lg' : '') + (cliente.data.TipoPersona == 3 ? 'fas fa-baby fa-lg' : '') + ' mr-2'"></i>Cliente pendiente a rellenar</p>
                                 </div>
                                 
                                 <div class="actions d-flex ml-auto">
@@ -117,16 +116,16 @@
             <i class="icon fas fa-angle-down"></i>
             <ul class="menu list-none mb-0">
                 <li id="listEsp" class="item active w-100">
-                <a @click="changeLang('es')" :href="'#/form?lang=es&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
+                <a @click="changeLang('es')" :href="'#/listausuarios?lang=es&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ESPAÑOL}}</a>
                 </li>
                 <li id="listEng" class="item w-100">
-                <a @click="changeLang('en')" :href="'#/form?lang=en&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.INGLES}}</a>
+                <a @click="changeLang('en')" :href="'#/listausuarios?lang=en&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.INGLES}}</a>
                 </li>
                 <li id="listDe" class="item w-100">
-                <a @click="changeLang('de')" :href="'#/form?lang=de&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ALEMAN}}</a>
+                <a @click="changeLang('de')" :href="'#/listausuarios?lang=de&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.ALEMAN}}</a>
                 </li>
                 <li id="listFr" class="item w-100">
-                <a @click="changeLang('fr')" :href="'#/form?lang=fr&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.FRANCES}}</a>
+                <a @click="changeLang('fr')" :href="'#/listausuarios?lang=fr&profile=' + this.actualProfile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id" class="btn btn-reset text text-uppercase p-1">{{this.textValues.FRANCES}}</a>
                 </li>
             </ul>
         </div>
@@ -158,6 +157,28 @@ export default {
             textValues: {},
             profiles: profilesJson,
             style: {},
+            changeLang(lang) {
+                if (lang === "es") {
+                    this.textValues = json.es;
+                    this.toggleBodyClass("langEsp");
+                    this.actualLang = "es";
+                }
+                if (lang === "en") {
+                    this.textValues = json.en
+                    this.toggleBodyClass("langEng");
+                    this.actualLang = "en";
+                }
+                if (lang === "de") {
+                    this.textValues = json.de
+                    this.toggleBodyClass("langDe");
+                    this.actualLang = "de";
+                }
+                if (lang === "fr") {
+                    this.textValues = json.fr
+                    this.toggleBodyClass("langFr");
+                    this.actualLang = "fr";
+                }
+            },
             checkLang() {
                 if (this.$route.query.lang === "es") {
                     this.textValues = json.es
@@ -166,6 +187,14 @@ export default {
                 if (this.$route.query.lang === "en") {
                     this.textValues = json.en
                     this.actualLang = "en";
+                }
+                if (this.$route.query.lang === "de") {
+                    this.textValues = json.de
+                    this.actualLang = "de";
+                }
+                if (this.$route.query.lang === "fr") {
+                    this.textValues = json.fr
+                    this.actualLang = "fr";
                 }
             },
             checkProfile() {
@@ -180,19 +209,6 @@ export default {
                     this.api_url = profilesJson.other.api_url;
                 } 
             },
-            changeLang(lang) {
-                if (lang === "es") {
-                    this.textValues = json.es;
-                    this.toggleBodyClass("langEsp");
-                    this.actualLang = "es";
-                }
-                if (lang === "en") {
-                    this.textValues = json.en
-                    this.toggleBodyClass("langEng");
-                    this.actualLang = "en";
-                }
-            },
-            
         }
     },
 
@@ -201,9 +217,7 @@ export default {
             //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
             this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
                 .then(response => {
-                    console.log(response.data)
                     this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
-                    console.log(response.data);
                     this.isReservaComplete();
                 }).catch(error => {
                     console.log(error)
@@ -212,14 +226,27 @@ export default {
 
         toggleBodyClass(langId) {
             const el = document.body;
-
             if (langId === "langEsp") {
                 document.getElementById("listEsp").classList.add("active");
                 document.getElementById("listEng").classList.remove("active");
+                document.getElementById("listDe").classList.remove("active");
+                document.getElementById("listFr").classList.remove("active");
             } if (langId === "langEng") {
                 document.getElementById("listEsp").classList.remove("active");
+                document.getElementById("listDe").classList.remove("active");
+                document.getElementById("listFr").classList.remove("active");
                 document.getElementById("listEng").classList.add("active");
-            }  
+            } if (langId === "langDe") {
+                document.getElementById("listEsp").classList.remove("active");
+                document.getElementById("listEng").classList.remove("active");
+                document.getElementById("listFr").classList.remove("active");
+                document.getElementById("listDe").classList.add("active");
+            } if (langId === "langFr") {
+                document.getElementById("listEsp").classList.remove("active");
+                document.getElementById("listEng").classList.remove("active");
+                document.getElementById("listDe").classList.remove("active");
+                document.getElementById("listFr").classList.add("active");
+            }   
         },
 
         isReservaComplete() {
@@ -232,6 +259,7 @@ export default {
                     this.customersWithConfirmation.push({ 'completado': false, 'data': client });
                 }
             });
+
 
         }
     },
@@ -247,6 +275,10 @@ export default {
             document.getElementById("listEsp").classList.add("active");
         } else if (this.$route.query.lang === "en") {
             document.getElementById("listEng").classList.add("active");
+        } else if (this.$route.query.lang === "de") {
+            document.getElementById("listDe").classList.add("active");
+        } else if (this.$route.query.lang === "fr") {
+            document.getElementById("listFr").classList.add("active");
         }
     }
 }
