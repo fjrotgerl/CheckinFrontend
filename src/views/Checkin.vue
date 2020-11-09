@@ -17,7 +17,7 @@
                             <embed src="https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/XML_Documentation_Intl.pdf" type="application/pdf" />
                         </object> -->
                         <div id="test" style="background-color: white;">
-                          <iframe ref="iframe1" frameborder="0" src="http://jornadasciberseguridad.riasc.unileon.es/archivos/ejemplo_esp.pdf" ></iframe>
+                          <iframe ref="iframe1" frameborder="0" src="C:/Users/Javier/Desktop/Frontend/ficheros/final.pdf" ></iframe>
                           <!-- <div v-for="pdf in pdfList" v-bind:key="pdf"> -->
                             <!-- <div v-if="$route.query.id == 1" >
                               <iframe frameborder="0" :src="'ficheros/' + pdf + 'eng_txt.txt'" ></iframe>
@@ -45,7 +45,7 @@
 
                             <div class="align-center form-group col-3 col-md-3" style="margin: 20px;">
                                 <label for="" class="sr-only"></label>
-                                <button type="button" @click="clearCanvas()" class="btn btn-solid text-uppercase btn-block text" style="background-color: #006682; color: #ffffff; ">{{this.textValues.LIMPIAR}}</button>
+                                <button type="button" @click="clearCanvas()" class="py-2 btn btn-solid text-uppercase btn-block text" style="background-color: #006682; color: #ffffff; ">{{this.textValues.LIMPIAR}}</button>
                             </div>
 
                             <div class="form-group col-12 d-flex align-items-center flex-row-reverse justify-content-start mb-4">
@@ -55,12 +55,12 @@
 
                             <div class="form-group col-12 col-md-6">
                                 <label for="" class="sr-only"></label>
-                                <button type="button" :disabled="!this.finishCheck || !this.data.covid" @click="updateClientData()" :class="'btn btn-solid text-uppercase btn-block text'" style="background-color: #006682; color: #ffffff; ">Guardar</button>
+                                <button type="button" :disabled="!this.finishCheck || !this.data.covid" @click="updateClientData()" :class="'btn btn-solid text-uppercase btn-block text py-2'" style="background-color: #006682; color: #ffffff; ">Guardar</button>
                             </div>
 
                             <div class="form-group col-12 col-md-6">
                                 <label for="" class="sr-only"></label>
-                                <button type="button" @click="$router.push('form?lang=' + $route.query.lang + '&profile=' + $route.query.profile + '&hotel=' + $route.query.hotel + '&localizator=' + $route.query.localizator + '&fechaentrada=' + $route.query.fechaentrada + '&fechasalida=' + $route.query.fechasalida + '&apellido=' + $route.query.apellido + '&id=' + $route.query.id)" class="btn btn-solid text-uppercase btn-block text" style="background-color: #006682; color: #ffffff; ">Cancelar</button>
+                                <button type="button" @click="$router.push('form?lang=' + $route.query.lang + '&profile=' + $route.query.profile + '&hotel=' + $route.query.hotel + '&localizator=' + $route.query.localizator + '&fechaentrada=' + $route.query.fechaentrada + '&fechasalida=' + $route.query.fechasalida + '&apellido=' + $route.query.apellido + '&id=' + $route.query.id)" class="btn btn-solid text-uppercase btn-block text py-2" style="background-color: #006682; color: #ffffff; ">Cancelar</button>
                             </div>
 
                         </form>
@@ -258,6 +258,30 @@ export default {
     }
   },
   methods: {
+    async getFiles() {
+
+
+      let pdfsToPrint = [];
+
+      this.pdfList.forEach(pdfName => {
+
+        if (this.$route.query.id == 1) {
+          pdfsToPrint.push(pdfName + 'eng_txt.txt');
+        }
+
+        if (this.$route.query.id != 1 && !pdfName.includes('Doc_1')) {
+          pdfsToPrint.push(pdfName + 'eng_txt.txt');
+        }
+
+      })
+
+      await this.axios.post("http://localhost:8081/getPDFs", pdfsToPrint)
+        .then(response => {
+          console.log(pdfsToPrint)
+        })
+
+    },
+
     getReserva() {
     //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
       this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
@@ -478,11 +502,11 @@ export default {
     this.checkLang();
     this.checkProfile();
     this.getReserva();
+    this.getFiles();
     
   },
 
   mounted() {
-    
     /* ------------------------------------------------------ */
     /* CANVAS */
     /* ------------------------------------------------------ */

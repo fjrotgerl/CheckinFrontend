@@ -341,6 +341,7 @@ export default {
       this.checkProfile();
   },
   mounted() {
+      console.log("dentro")
       if (this.$route.query.lang === "es") {
             document.getElementById("listEsp").classList.add("active");
         } else if (this.$route.query.lang === "en") {

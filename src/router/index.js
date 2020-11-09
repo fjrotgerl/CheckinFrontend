@@ -7,12 +7,15 @@ import BusquedaForm  from '../views/BusquedaForm.vue'
 import NuevoUsuario  from '../views/NuevoUsuario.vue'
 import ListaUsuarios from '../views/ListaUsuarios.vue'
 import ListaReservas from '../views/ListaVariasReservas.vue'
+import EmptyPage     from '../views/EmptyPage.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/', redirect: '/busqueda?lang=es&profile=default'
+    path: '/',
+    name: "Empty",
+    component: EmptyPage
   },
   {
     path: '/busqueda',
@@ -62,7 +65,8 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes,
 })
 
 export default router

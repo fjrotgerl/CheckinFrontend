@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/clientes">Clientes</router-link> |
-      <router-link to="/form">Form</router-link> |
-      <router-link to="/Busqueda">Busqueda</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -75,5 +70,13 @@
 } */
 
 </style>
+
+<script>
+export default {
+  created () {
+    console.log("dentro")
+  }
+}
+</script>
 
 <script src="./static/js/index"></script>

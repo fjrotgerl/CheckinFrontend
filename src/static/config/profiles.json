@@ -1,6 +1,7 @@
 {
     "default": {
         "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8082",
         "style": {
             "URL_IMAGEN_FONDO": "https://picsum.photos/1500/700?random&#x3D;1",
             "URL_LOGO_MARCA": "https://www.aluahotels.com/uploads/logoshotel/svg/logo-alua-header.svg",
@@ -22,6 +23,7 @@
     },
     "alua": {
         "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8081",
         "style": {
             "URL_IMAGEN_FONDO": "https://i.pinimg.com/originals/f2/f0/cb/f2f0cb34e485e4be0407b3f1e588f187.jpg",
             "URL_LOGO_MARCA": "https://previews.123rf.com/images/ikalvi/ikalvi1712/ikalvi171200406/92424242-logotipo-para-la-agencia-de-viajes-tropical-resort-beach-hotel-spa-s%C3%ADmbolo-de-vacaciones-de-verano-log.jpg",
@@ -35,6 +37,7 @@
     },
     "other": {
         "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8081",
         "style": {
             "URL_IMAGEN_FONDO": "https://i.pinimg.com/originals/f2/f0/cb/f2f0cb34e485e4be0407b3f1e588f187.jpg",
             "URL_LOGO_MARCA": "https://previews.123rf.com/images/ikalvi/ikalvi1712/ikalvi171200406/92424242-logotipo-para-la-agencia-de-viajes-tropical-resort-beach-hotel-spa-s%C3%ADmbolo-de-vacaciones-de-verano-log.jpg",
