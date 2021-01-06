@@ -1,0 +1,88 @@
+{
+    "default": {
+        "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8082",
+        "style": {
+            "URL_IMAGEN_FONDO": "../img/backgrounds/fondo_alua.jpg",
+            "URL_LOGO_MARCA": "https://www.aluahotels.com/uploads/logoshotel/svg/logo-alua-header.svg",
+            "COLOR_FONDO_CUADRO_FORMULARIO": "#00a5b1",
+            "COLOR_BOTON": "#006682",
+            "COLOR_TEXTO_BOTON": "#ffffff",
+            "COLOR_ICONO_GRIS": "#495057",
+            "COLOR_BOTON_EDITAR": "",
+            "COLOR_BOTON_BORRAR": ""
+        },
+        "showBanner": 1,
+        "colorBrand": "rgb(255 255 255 / 57%)",
+        "bannerHeader": {
+            "url": "http://www.amresortseu.com/",
+            "img": "../img/banners/amr_black.png"
+        },
+        "banner": [
+            {
+                "url": "https://www.aluahotels.com/",
+                "img": "../img/banners/bandalogos_footer.png",
+                "width": ""
+            }
+        ],
+        "hotels": [
+            {
+                "id": "H20",
+                "title": "HOTEL VILLAGE",
+                "docs": ["Doc_1_H20_1_","Doc_2_H00_2_","policia_"]
+            },
+            {
+                "id": "H22",
+                "title": "H22",
+                "docs": ["Doc_1_H20_1_","Doc_2_H00_2_","policia_"]
+            }
+        ],
+        "camposObligatorios": {
+            "nombre": true,
+            "primer_apellido": true,
+            "segundo_apellido": false,
+            "tipo_doc": true,
+            "num_documento": true,
+            "fecha_expedicion": true,
+            "fecha_nacimiento": true,
+            "pais_nacimiento": true,
+            "pais": true,
+            "email": false,
+            "sexo": true,
+            "direccion": false,
+            "poblacion": false,
+            "provincia": false,
+            "codigo_postal": false,
+            "acepta_terminos": false
+        }
+              
+    },
+    "alua": {
+        "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8081",
+        "style": {
+            "URL_IMAGEN_FONDO": "https://i.pinimg.com/originals/f2/f0/cb/f2f0cb34e485e4be0407b3f1e588f187.jpg",
+            "URL_LOGO_MARCA": "https://previews.123rf.com/images/ikalvi/ikalvi1712/ikalvi171200406/92424242-logotipo-para-la-agencia-de-viajes-tropical-resort-beach-hotel-spa-s%C3%ADmbolo-de-vacaciones-de-verano-log.jpg",
+            "COLOR_FONDO_CUADRO_FORMULARIO": "#666666",
+            "COLOR_BOTON": "#ff8800",
+            "COLOR_TEXTO_BOTON": "blue"  
+        },
+        "hotels": [
+            {"id": "H20", "title": "Hotel 1"}
+        ]  
+    },
+    "other": {
+        "api_url": "http://iis.applelgeu.com:48082//AWWebAPI/api/aw/awa",
+        "custom_api_url": "http://localhost:8081",
+        "style": {
+            "URL_IMAGEN_FONDO": "https://i.pinimg.com/originals/f2/f0/cb/f2f0cb34e485e4be0407b3f1e588f187.jpg",
+            "URL_LOGO_MARCA": "https://previews.123rf.com/images/ikalvi/ikalvi1712/ikalvi171200406/92424242-logotipo-para-la-agencia-de-viajes-tropical-resort-beach-hotel-spa-s%C3%ADmbolo-de-vacaciones-de-verano-log.jpg",
+            "COLOR_FONDO_CUADRO_FORMULARIO": "#666666",
+            "COLOR_BOTON": "#ff8800",
+            "COLOR_TEXTO_BOTON": "blue"  
+        },
+        "hotels": [
+            {"id": "H20", "title": "Hotel 1"}
+        ]  
+    }
+}

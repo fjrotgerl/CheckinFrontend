@@ -8,7 +8,13 @@
 
 export default {
   mounted() {
-    this.$router.push("/busqueda?lang=es&profile=default")
+    let lang = this.$route.query.lang;
+    let profile = this.$route.query.profile;
+
+    if (lang == undefined) lang = "es";
+    if (profile == undefined) profile = "default";
+
+    this.$router.push("/busqueda?lang=" + lang + "&profile=" + profile)
   }
  
 }

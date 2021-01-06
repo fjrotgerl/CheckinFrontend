@@ -65,8 +65,8 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
-  mode: 'history',
   routes,
+  mode: 'history'
 })
 
 export default router
