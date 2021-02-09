@@ -373,8 +373,13 @@ export default {
         .then(response => {
             
             if (response.data.LSReservas.length == 1) {
-                this.reserva_not_found = false;               
-                this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)
+                this.reserva_not_found = false;
+                if (this.data.localizador != "" && apellido != "") {
+                    this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=")
+                }
+                else {
+                    this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)
+                }  
             } if (response.data.LSReservas.length > 1) {
                 this.multiples_reservas_founds = true;
                 // this.$router.push("reservas?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)

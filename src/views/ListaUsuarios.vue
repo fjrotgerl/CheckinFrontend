@@ -25,7 +25,7 @@
                                 <div v-else>
                                     <i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-times icon-size-1-4 mr-3"></i>
                                 </div> -->
-                                <div v-if="cliente.data.Nombre != ''" class="d-flex align-items-center">
+                                <div v-if="cliente.data.Nombre != '' && cliente.data.Nombre != null" class="d-flex align-items-center">
                                     <div v-if="cliente.completado">
                                         <i class="icon fas fa-check icon-size-1-4 icon-color-green mr-3"></i>
                                     </div>
@@ -34,7 +34,7 @@
                                     </div>
                                     <img :style="'float: left; ' + (cliente.data.TipoPersona != 0  ? 'padding: 5px;' : '')" :src="(cliente.data.TipoPersona == 0 ? './img/icons/adulto.png' : '') + (cliente.data.TipoPersona == 1 ? './img/icons/joven.png' : '') + (cliente.data.TipoPersona == 2 ? './img/icons/niño.png' : '') + (cliente.data.TipoPersona == 3 ? './img/icons/cuna.png' : '')" width="36" height="36">
                                     <!-- <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" :class="'icon ' + (cliente.data.TipoPersona == 0 ? 'fas fa-user fa-lg' : '') + (cliente.data.TipoPersona == 1 ? 'fas fa-user fa-sm' : '') + (cliente.data.TipoPersona == 2 ? 'fas fa-child fa-lg' : '') + (cliente.data.TipoPersona == 3 ? 'fas fa-baby fa-lg' : '') + ' mr-2'"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p> -->
-                                    <span class="text mb-0">{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</span>
+                                    <span class="text mb-0">{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + (cliente.data.Apellido2 == null ? '' : cliente.data.Apellido2)}}</span>
                                 </div>
                                 <div v-else class="d-flex align-items-center">
                                     <div v-if="cliente.completado">
