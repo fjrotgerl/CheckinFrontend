@@ -34,7 +34,7 @@
                                     </div>
                                     <img :style="'float: left; ' + (cliente.data.TipoPersona != 0  ? 'padding: 5px;' : '')" :src="(cliente.data.TipoPersona == 0 ? './img/icons/adulto.png' : '') + (cliente.data.TipoPersona == 1 ? './img/icons/joven.png' : '') + (cliente.data.TipoPersona == 2 ? './img/icons/niño.png' : '') + (cliente.data.TipoPersona == 3 ? './img/icons/cuna.png' : '')" width="36" height="36">
                                     <!-- <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" :class="'icon ' + (cliente.data.TipoPersona == 0 ? 'fas fa-user fa-lg' : '') + (cliente.data.TipoPersona == 1 ? 'fas fa-user fa-sm' : '') + (cliente.data.TipoPersona == 2 ? 'fas fa-child fa-lg' : '') + (cliente.data.TipoPersona == 3 ? 'fas fa-baby fa-lg' : '') + ' mr-2'"></i>{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + cliente.data.Apellido2}}</p> -->
-                                    <span class="text mb-0">{{cliente.data.Nombre + " " + cliente.data.Apellido1 + " " + (cliente.data.Apellido2 == null ? '' : cliente.data.Apellido2)}}</span>
+                                    <span class="text mb-0">{{cliente.data.Nombre + " " + (cliente.data.Apellido1 == null ? '' : cliente.data.Apellido1) + " " + (cliente.data.Apellido2 == null ? '' : cliente.data.Apellido2)}}</span>
                                 </div>
                                 <div v-else class="d-flex align-items-center">
                                     <div v-if="cliente.completado">
@@ -49,7 +49,7 @@
                                 </div>
                                 
                                 <div class="actions d-flex ml-auto">
-                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido + '&id=' + cliente.data.NumeroCliente + '&reserva=' + reservaId + '&completado=' + cliente.completado)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i class="icon fas fa-angle-right icon-edit"></i></button>
+                                    <button @click="$router.push('/form?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + dataForRequest.hotel + '&localizator=' + dataForRequest.localizador + '&fechaentrada=' + dataForRequest.fecha_entrada + '&fechasalida=' + dataForRequest.fecha_salida + '&apellido=' + dataForRequest.apellido + '&id=' + cliente.data.NumeroCliente + '&reserva=' + reservaId + '&completado=' + cliente.completado + '&referencia=' + $route.query.referencia)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i class="icon fas fa-angle-right icon-edit"></i></button>
                                     <!-- <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button> -->
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ export default {
                 apellido: this.$route.query.apellido
             },
             customersWithConfirmation: [],
-            customersData: {},
+            customersData: [],
             reservaData: {},
             actualProfile: "default",
             actualLang: "es",
@@ -216,13 +216,31 @@ export default {
     },
 
         getReserva() {
-            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
+            this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" )
             //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
                 .then(response => {
-                    this.reservaId = response.data.LSReservas[0].Reserva;
-                    this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
-                    this.isReservaComplete();
-                    console.log(response.data)
+                    if (response.data.LSReservaHabAWA == 0) {
+                        this.reservaId = response.data.LSReservas[0].Reserva;
+                        // this.$route.query.
+                        
+                        this.customersData = response.data.LSReservas[0].LSReservaHabAWA[0].LSReservaCliente;
+                        
+                        this.isReservaComplete();
+                    } else {
+                        this.reservaId = response.data.LSReservas[0].Reserva;
+                        
+                        response.data.LSReservas[0].LSReservaHabAWA.forEach(item => {
+                            if (item.Referencia == this.$route.query.referencia) {
+                                console.log(item)
+                                item.LSReservaCliente.forEach(client => {
+                                    this.customersData.push(client);
+                                })
+                            }
+                            
+                        })
+                        this.isReservaComplete();
+                    }
+                    
                 }).catch(error => {
                     console.error(error)
                 });
@@ -301,15 +319,12 @@ export default {
 
             this.customersData.forEach(client => {
 
-                if (client.AceptaInfo === true && client.Apellido1 != "" && client.Edad != ""
-                && client.IDDocumento != "" && client.Nombre != "" && client.TipoDocumento != "") {
+                if (client.Firma != null) {
                     this.customersWithConfirmation.push({ 'completado': true, 'data': client });
                 } else {
                     this.customersWithConfirmation.push({ 'completado': false, 'data': client });
                 }
             });
-
-            console.log(this.customersWithConfirmation)
 
         }
     },

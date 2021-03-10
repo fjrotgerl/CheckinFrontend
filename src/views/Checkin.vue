@@ -288,7 +288,7 @@ export default {
 
       let data = JSON.parse(localStorage.data);
 
-      await this.axios.post("http://localhost:8081/getHTMLText", {
+      await this.axios.post("http://10.5.0.22:8081/getHTMLText", {
           pdf: {
             pdfList: pdfsToPrint, 
           }, 
@@ -407,39 +407,45 @@ export default {
       
       this.client_data.LSReservas.forEach(reserva => {
         if (reserva.Reserva === this.$route.query.reserva) {
-          reserva.LSReservaHabAWA[0].LSReservaCliente.forEach(element => {
-            if (element.NumeroCliente == this.$route.query.id) {
-              let dc = element.DC;
-              element.IDDocumento = this.data.num_documento;
-              element.TipoDocumento = this.data.tipo_doc;
-              element.FechaExpedicion = this.data.fecha_expedicion;
-              element.PaisNacimiento = this.data.pais_nacimiento;
-              element.Email = this.data.email;
-              element.FechaNacimiento = this.data.fecha_nacimiento;
-              element.Sexo = this.data.sexo;
-              element.Nombre = this.data.nombre;
-              element.Apellido1 = this.data.primer_apellido;
-              element.Apellido2 = this.data.segundo_apellido;
-              element.AceptaInfo = this.data.acepta_terminos;
-              dc.ApartadoCorreos = null,
-              dc.CodigoPostal = this.data.codigo_postal,
-              dc.ComunidadAutonoma = "",
-              dc.Descripcion = null,
-              dc.Direccion = this.data.direccion,
-              dc.EMail = null,
-              dc.Fax = null,
-              dc.Pais = this.data.pais,
-              dc.Poblacion = this.data.poblacion,
-              dc.Provincia = this.data.provincia,
-              dc.Telefono = this.data.telefono,
-              dc.TelefonoMovil = null
+          reserva.LSReservaHabAWA.forEach(habitacion => {
+            if (habitacion.Referencia == this.$route.query.referencia) {
+              habitacion.LSReservaCliente.forEach(element => {
+                if (element.NumeroCliente == this.$route.query.id) {
+                  let dc = element.DC;
+                  element.IDDocumento = this.data.num_documento;
+                  element.TipoDocumento = this.data.tipo_doc;
+                  element.FechaExpedicion = this.data.fecha_expedicion;
+                  element.PaisNacimiento = this.data.pais_nacimiento;
+                  element.Email = this.data.email;
+                  element.FechaNacimiento = this.data.fecha_nacimiento;
+                  element.Sexo = this.data.sexo;
+                  element.Nombre = this.data.nombre;
+                  element.Apellido1 = this.data.primer_apellido;
+                  element.Apellido2 = this.data.segundo_apellido;
+                  element.AceptaInfo = this.data.acepta_terminos;
+                  element.Firma = c.toDataURL("image/png").split(';base64,')[1];
+                  dc.ApartadoCorreos = null,
+                  dc.CodigoPostal = this.data.codigo_postal,
+                  dc.ComunidadAutonoma = "",
+                  dc.Descripcion = null,
+                  dc.Direccion = this.data.direccion,
+                  dc.EMail = null,
+                  dc.Fax = null,
+                  dc.Pais = this.data.pais,
+                  dc.Poblacion = this.data.poblacion,
+                  dc.Provincia = this.data.provincia,
+                  dc.Telefono = this.data.telefono,
+                  dc.TelefonoMovil = null
+                }
+              });
             }
-          });
+          })
         }
       })
-
+          
       this.client_data.LSReservas.forEach(reserva => {
         if (reserva.Reserva === this.$route.query.reserva) {
+          console.log(reserva)
           this.axios.post(this.api_url + "/PostAWAReservationGuests", {
             'Hotel': this.$route.query.hotel,
             'LSReservas': [
@@ -448,19 +454,20 @@ export default {
                 'Reserva': reserva.Reserva,
                 'Localizador': reserva.Localizador,
                 'EntidadNegocio': reserva.EntidadNegocio,
-                'LSReservaHabAWA': [
-                  {
-                    'Linea': reserva.LSReservaHabAWA[0].Linea,
-                    'Referencia': reserva.LSReservaHabAWA[0].Referencia,
-                    'LSReservaCliente': reserva.LSReservaHabAWA[0].LSReservaCliente
-                  }
-                ]
+                'LSReservaHabAWA': reserva.LSReservaHabAWA
+                // 'LSReservaHabAWA': [
+                //   {
+                //     'Linea': reserva.LSReservaHabAWA[0].Linea,
+                //     'Referencia': reserva.LSReservaHabAWA[0].Referencia,
+                //     'LSReservaCliente': reserva.LSReservaHabAWA[0].LSReservaCliente
+                //   }
+                // ]
               }
             ]
           })
           .then(response => {
             //console.log(reserva.LSReservaHabAWA[0].LSReservaCliente)
-            this.$router.push("/listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.$route.query.hotel + "&localizator=" + this.$route.query.localizator + "&fechaentrada" + this.$route.query.fechaentrada + "&fechasalida=" + this.$route.query.fechasalida + "&apellido=" + this.$route.query.apellido + "&reserva=" + this.$route.query.reserva);
+            this.$router.push("/listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.$route.query.hotel + "&localizator=" + this.$route.query.localizator + "&fechaentrada" + this.$route.query.fechaentrada + "&fechasalida=" + this.$route.query.fechasalida + "&apellido=" + this.$route.query.apellido + "&reserva=" + this.$route.query.reserva + '&referencia=' + this.$route.query.referencia);
           })
         }
       })
@@ -469,22 +476,22 @@ export default {
 
     changeLang(lang) {
       if (lang === "es") {
-        this.textValues = this.json.es;
+        this.textValues = json.es;
         this.toggleBodyClass("langEsp");
         this.actualLang = "es";
       }
       if (lang === "en") {
-        this.textValues = this.json.en
+        this.textValues = json.en
         this.toggleBodyClass("langEng");
         this.actualLang = "en";
       }
       if (lang === "de") {
-        this.textValues = this.json.de
+        this.textValues = json.de
         this.toggleBodyClass("langDe");
         this.actualLang = "de";
       }
       if (lang === "fr") {
-        this.textValues = this.json.fr
+        this.textValues = json.fr
         this.toggleBodyClass("langFr");
         this.actualLang = "fr";
       }
@@ -492,22 +499,22 @@ export default {
 
     checkLang() {
       if (this.$route.query.lang === "es") {
-        this.textValues = this.json.es
+        this.textValues = json.es
         this.actualLang = "es";
       }
 
       if (this.$route.query.lang === "en") {
-        this.textValues = this.json.en
+        this.textValues = json.en
         this.actualLang = "en";
       }
 
       if (this.$route.query.lang === "de") {
-        this.textValues = this.json.de
+        this.textValues = json.de
         this.actualLang = "de";
       }
 
       if (this.$route.query.lang === "fr") {
-        this.textValues = this.json.fr
+        this.textValues = json.fr
         this.actualLang = "fr";
       }
     },

@@ -1,234 +1,210 @@
 export default [
   {
-      "name": "ALAVA",
-      "value": "ALAVA"
+      "name": "ÁLAVA",
+      "value": "ÁLAVA"
   },
   {
-    "name": "ALBACETE",
-    "value": "ALBACETE"
+      "name": "BURGOS",
+      "value": "BURGOS"
   },
   {
-    "name": "ALICANTE",
-    "value": "ALICANTE"
+      "name": "ALBACETE",
+      "value": "ALBACETE"
   },
   {
-    "name": "ALMERÍA",
-    "value": "ALMERÍA"
+      "name": "GUIPUZCOA",
+      "value": "GUIPUZCOA"
   },
   {
-    "name": "ASTURIAS",
-    "value": "ASTURIAS"
+      "name": "HUELVA",
+      "value": "HUELVA"
   },
   {
-    "name": "ÁVILA",
-    "value": "ÁVILA"
+      "name": "MURCIA",
+      "value": "MURCIA"
   },
   {
-    "name": "BADAJOZ",
-    "value": "BADAJOZ"
+      "name": "CUENCA",
+      "value": "CUENCA"
   },
   {
-    "name": "BARCELONA",
-    "value": "BARCELONA"
+      "name": "ALICANTE",
+      "value": "ALICANTE"
   },
   {
-    "name": "BURGOS",
-    "value": "BURGOS"
+      "name": "ASTURIAS",
+      "value": "ASTURIAS"
   },
   {
-    "name": "CÁCERES",
-    "value": "CÁCERES"
+      "name": "ALMERÍA",
+      "value": "ALMERÍA"
   },
   {
-    "name": "CÁDIZ",
-    "value": "CÁDIZ"
+      "name": "ÁVILA",
+      "value": "ÁVILA"
   },
   {
-    "name": "CANTABRIA",
-    "value": "CANTABRIA"
+      "name": "BADAJOZ",
+      "value": "BADAJOZ"
   },
   {
-    "name": "CASTELLÓN",
-    "value": "CASTELLÓN"
+      "name": "ILLES BALEARS",
+      "value": "ILLES BALEARS"
   },
   {
-    "name": "CEUTA",
-    "value": "CEUTA"
+      "name": "BARCELONA",
+      "value": "BARCELONA"
   },
   {
-    "name": "CIUDAD REAL",
-    "value": "CIUDAD REAL"
+      "name": "LLEIDA",
+      "value": "LLEIDA"
   },
   {
-    "name": "CÓRDOBA",
-    "value": "CÓRDOBA"
+      "name": "CÁCERES",
+      "value": "CÁCERES"
   },
   {
-    "name": "CUENCA",
-    "value": "CUENCA"
+      "name": "SEVILLA",
+      "value": "SEVILLA"
   },
   {
-    "name": "EL HIERRO",
-    "value": "EL HIERRO"
+      "name": "CÁDIZ",
+      "value": "CÁDIZ"
   },
   {
-    "name": "FUERTEVENTURA",
-    "value": "FUERTEVENTURA"
+      "name": "CASTELLÓN",
+      "value": "CASTELLÓN"
   },
   {
-    "name": "GIRONA",
-    "value": "GIRONA"
+      "name": "CIUDAD REAL",
+      "value": "CIUDAD REAL"
   },
   {
-    "name": "GRAN CANARIA",
-    "value": "GRAN CANARIA"
+      "name": "CÓRDOBA",
+      "value": "CÓRDOBA"
   },
   {
-    "name": "GRANADA",
-    "value": "GRANADA"
+      "name": "A CORUÑA",
+      "value": "A CORUÑA"
   },
   {
-    "name": "GUADALAJARA",
-    "value": "GUADALAJARA"
+      "name": "GRANADA",
+      "value": "GRANADA"
   },
   {
-    "name": "GUIPUZCOA",
-    "value": "GUIPUZCOA"
+      "name": "GUADALAJARA",
+      "value": "GUADALAJARA"
   },
   {
-    "name": "HUELVA",
-    "value": "HUELVA"
+      "name": "GIRONA",
+      "value": "GIRONA"
   },
   {
-    "name": "HUESCA",
-    "value": "HUESCA"
+      "name": "LEÓN",
+      "value": "LEÓN"
   },
   {
-    "name": "ISLAS BALEARES",
-    "value": "ISLAS BALEARES"
+      "name": "HUESCA",
+      "value": "HUESCA"
   },
   {
-    "name": "JAÉN",
-    "value": "JAÉN"
+      "name": "ZARAGOZA",
+      "value": "ZARAGOZA"
   },
   {
-    "name": "LA CORUÑA",
-    "value": "LA CORUÑA"
+      "name": "JAÉN",
+      "value": "JAÉN"
   },
   {
-    "name": "LA GOMERA",
-    "value": "LA GOMERA"
+      "name": "LA RIOJA",
+      "value": "LA RIOJA"
   },
   {
-    "name": "LA PALMA",
-    "value": "LA RIOJA"
+      "name": "LUGO",
+      "value": "LUGO"
   },
   {
-    "name": "LANZAROTE",
-    "value": "LANZAROTE"
+      "name": "MADRID",
+      "value": "MADRID"
   },
   {
-    "name": "LAS PALMAS",
-    "value": "LAS PALMAS"
+      "name": "MÁLAGA",
+      "value": "MÁLAGA"
   },
   {
-    "name": "LEÓN",
-    "value": "LEÓN"
+      "name": "NAVARRA",
+      "value": "NAVARRA"
   },
   {
-    "name": "LLEIDA",
-    "value": "LLEIDA"
+      "name": "OURENSE",
+      "value": "OURENSE"
   },
   {
-    "name": "LUGO",
-    "value": "LUGO"
+      "name": "PALENCIA",
+      "value": "PALENCIA"
   },
   {
-    "name": "MADRID",
-    "value": "MADRID"
+      "name": "LAS PALMAS",
+      "value": "LAS PALMAS"
   },
   {
-    "name": "MÁLAGA",
-    "value": "MÁLAGA"
+      "name": "PONTEVEDRA",
+      "value": "PONTEVEDRA"
   },
   {
-    "name": "MELILLA",
-    "value": "MELILLA"
+      "name": "SALAMANCA",
+      "value": "SALAMANCA"
   },
   {
-    "name": "MURCIA",
-    "value": "MURCIA"
+      "name": "SANTA CRUZ DE TENERIFE",
+      "value": "SANTA CRUZ DE TENERIFE"
   },
   {
-    "name": "NAVARRA",
-    "value": "NAVARRA"
+      "name": "CANTABRIA",
+      "value": "CANTABRIA"
   },
   {
-    "name": "ORENSE",
-    "value": "ORENSE"
+      "name": "SEGOVIA",
+      "value": "SEGOVIA"
   },
   {
-    "name": "PALENCIA",
-    "value": "PALENCIA"
+      "name": "SORIA",
+      "value": "SORIA"
   },
   {
-    "name": "PONTEVEDRA",
-    "value": "PONTEVEDRA"
+      "name": "TARRAGONA",
+      "value": "TARRAGONA"
   },
   {
-    "name": "SALAMANCA",
-    "value": "SALAMANCA"
+      "name": "VALENCIA",
+      "value": "VALENCIA"
   },
   {
-    "name": "SANTA CRUZ DE TENERIFE",
-    "value": "SANTA CRUZ DE TENERIFE"
+      "name": "TERUEL",
+      "value": "TERUEL"
   },
   {
-    "name": "SEGOVIA",
-    "value": "SEGOVIA"
+      "name": "TOLEDO",
+      "value": "TOLEDO"
   },
   {
-    "name": "SEVILLA",
-    "value": "SEVILLA"
+      "name": "VALLADOLID",
+      "value": "VALLADOLID"
   },
   {
-    "name": "SORIA",
-    "value": "SORIA"
+      "name": "VIZCAYA",
+      "value": "VIZCAYA"
   },
   {
-    "name": "TARRAGONA",
-    "value": "TARRAGONA"
+      "name": "ZAMORA",
+      "value": "ZAMORA"
   },
   {
-    "name": "TENERIFE",
-    "value": "TENERIFE"
+      "name": "CEUTA",
+      "value": "CEUTA"
   },
   {
-    "name": "TERUEL",
-    "value": "TERUEL"
-  },
-  {
-    "name": "TOLEDO",
-    "value": "TOLEDO"
-  },
-  {
-    "name": "VALENCIA",
-    "value": "VALENCIA"
-  },
-  {
-    "name": "VALLADOLID",
-    "value": "VALLADOLID"
-  },
-  {
-    "name": "VIZCAYA",
-    "value": "VIZCAYA"
-  },
-  {
-    "name": "ZAMORA",
-    "value": "ZAMORA"
-  },
-  {
-    "name": "ZARAGOZA",
-    "value": "ZARAGOZA"
+      "name": "MELILLA",
+      "value": "MELILLA"
   }
 ]

@@ -16,15 +16,15 @@
                         </a>
                     </div>
                     <div class="w-100">
-                        <div v-for="cliente in customersData" v-bind:key="cliente.Reserva">
+                        <div v-for="cliente in customersData.LSReservaHabAWA" v-bind:key="cliente.Reserva">
                             <div class="b-user col-12 mb-3 d-flex flex-wrap align-items-center pr-0" :style="'background-color: ' + style.COLOR_TEXTO_BOTON + ';'">
                                 
                                 <div>
-                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>{{cliente.LSReservaHabAWA[0].LSReservaCliente[0].Nombre + " " + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido1 + " " + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido2}}</p>
+                                    <p class="text mb-0"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-user-friends mr-2"></i>{{cliente.LSReservaCliente[0].Apellido1}}</p>
                                 </div>
                                 
                                 <div class="actions d-flex ml-auto">
-                                    <button @click="$router.push('listausuarios?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + cliente.HotelFactura + '&localizator=' + cliente.Localizador + '&fechaentrada=' + $route.query.fechaentrada + '&fechasalida=' + $route.query.fechasalida + '&apellido=' + cliente.LSReservaHabAWA[0].LSReservaCliente[0].Apellido1)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-angle-right "></i></button>
+                                    <button @click="$router.push('listausuarios?lang=' + actualLang + '&profile=' + actualProfile + '&hotel=' + customersData.HotelFactura + '&localizator=' + customersData.Localizador + '&fechaentrada=' + $route.query.fechaentrada + '&fechasalida=' + $route.query.fechasalida + '&apellido=' + cliente.LSReservaCliente[0].Apellido1 + '&referencia=' + cliente.Referencia)" class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_EDITAR + ';'"><i :style="'color: ' + style.COLOR_ICONO_GRIS + ';'" class="icon fas fa-angle-right "></i></button>
                                     <!-- <button class="btn btn-solid p-lg-3" :style="'background-color: ' + style.COLOR_BOTON_BORRAR + ';'"><i class="icon far fa-trash-alt icon-color-white"></i></button> -->
                                 </div>
                             </div>
@@ -186,7 +186,9 @@ export default {
             
             this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
                 .then(response => {
-                    this.customersData = response.data.LSReservas;
+                    this.customersData = response.data.LSReservas[0];
+                    console.log(this.customersData.LSReservaHabAWA)
+
                 }).catch(error => {
                     console.log(error)
                 });

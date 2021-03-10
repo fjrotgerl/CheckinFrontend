@@ -58,6 +58,7 @@
         "MENSAJE_ERROR_FALTA_TELEFONO": "Introduzca el número de teléfono",
         "MENSAJE_ERROR_REVISAR_NUM_DOCUMENTO": "Revise los datos introducidos",
         "MENSAJE_ERROR_EMAIL_INCORRECTO": "Revise la dirección de correo electrónico",
+        "MENSAJE_ERROR_CODIGO_POSTAL_INCORRECTO": "Código postal incorrecto",
         "BOTON_SELECCIONAR": "Seleccionar",
         "CALENDAR_IDIOMA": "es",
         "OPCIONAL": "Opcional",
@@ -75,7 +76,8 @@
         "FECHA_SALIDA_INCORRECTA": "Revise las fechas introducidas",
         "TARJETA_IDENTIDAD": "Tarjeta de identidad",
         "SOBREESCRIBIR_RESERVA": "Sus datos ya han sido enviados, si desea modificarlos, rellene de nuevo el formulario",
-        "MULTIPLES_RESERVAS_ENCONTRADAS": "Se han encontrado múltiples reservas, indique el localizador de la reserva"
+        "MULTIPLES_RESERVAS_ENCONTRADAS": "Se han encontrado múltiples reservas, indique el localizador de la reserva",
+        "RESERVA_NO_DISPONIBLE_72_HORAS": "La reserva no estará disponible hasta 72 horas antes del checkin"
     },
 
     "en": {
@@ -132,6 +134,7 @@
         "MENSAJE_ERROR_FALTA_TELEFONO": "Enter the phone number",
         "MENSAJE_ERROR_REVISAR_NUM_DOCUMENTO": "Check the fields entered",
         "MENSAJE_ERROR_EMAIL_INCORRECTO": "Check email address",
+        "MENSAJE_ERROR_CODIGO_POSTAL_INCORRECTO": "Incorrect zip code",
         "TEXTO_BOTON_SIGUIENTE": "Next",
         "CALENDAR_IDIOMA": "en",
         "TERMINAR": "Check-in",
@@ -150,7 +153,8 @@
         "FECHA_SALIDA_INCORRECTA": "Check the dates entered",
         "TARJETA_IDENTIDAD": "Identity card",
         "SOBREESCRIBIR_RESERVA": "Your data has already been sent, if you want to modify it, fill out the form again",
-        "MULTIPLES_RESERVAS_ENCONTRADAS": "Multiple reservations have been found, indicate the reservation locator"
+        "MULTIPLES_RESERVAS_ENCONTRADAS": "Multiple reservations have been found, indicate the reservation locator",
+        "RESERVA_NO_DISPONIBLE_72_HORAS": "The reservation will not be available until 72 hours before checkin"
     },
 
     "de": {
@@ -207,6 +211,7 @@
         "MENSAJE_ERROR_FALTA_TELEFONO": "Geben Sie die Telefonnummer ein",
         "MENSAJE_ERROR_REVISAR_NUM_DOCUMENTO": "Vérifiez les champs saisis",
         "MENSAJE_ERROR_EMAIL_INCORRECTO": "Vérifiez l'adresse e-mail",
+        "MENSAJE_ERROR_CODIGO_POSTAL_INCORRECTO": "Falsche Postleitzahl",
         "TEXTO_BOTON_SIGUIENTE": "Nächster",
         "CALENDAR_IDIOMA": "de",
         "TERMINAR": "Finalisieren",
@@ -225,7 +230,8 @@
         "FECHA_SALIDA_INCORRECTA": "Überprüfen Sie die eingegebenen Daten",
         "TARJETA_IDENTIDAD": "Personalausweis",
         "SOBREESCRIBIR_RESERVA": "Ihre Daten wurden bereits gesendet. Wenn Sie sie ändern möchten, füllen Sie das Formular erneut aus",
-        "MULTIPLES_RESERVAS_ENCONTRADAS": "Es wurden mehrere Reservierungen gefunden. Geben Sie den Reservierungsfinder an"
+        "MULTIPLES_RESERVAS_ENCONTRADAS": "Es wurden mehrere Reservierungen gefunden. Geben Sie den Reservierungsfinder an",
+        "RESERVA_NO_DISPONIBLE_72_HORAS": "Die Reservierung ist erst 72 Stunden vor dem Check-in möglich"
     },
 
     "fr": {
@@ -282,6 +288,7 @@
         "MENSAJE_ERROR_FALTA_TELEFONO": "Entrez le numéro de téléphone",
         "MENSAJE_ERROR_REVISAR_NUM_DOCUMENTO": "Überprüfen Sie die eingegebenen Felder",
         "MENSAJE_ERROR_EMAIL_INCORRECTO": "Überprüfen Sie die E-Mail-Adresse",
+        "MENSAJE_ERROR_CODIGO_POSTAL_INCORRECTO": "Code postal incorrect",
         "TEXTO_BOTON_SIGUIENTE": "Prochain",
         "CALENDAR_IDIOMA": "fr",
         "TERMINAR": "Finaliser",
@@ -300,7 +307,8 @@
         "FECHA_SALIDA_INCORRECTA": "Vérifiez les dates saisies",
         "TARJETA_IDENTIDAD": "Carte d'identité",
         "SOBREESCRIBIR_RESERVA": "Vos données ont déjà été envoyées, si vous souhaitez les modifier, remplissez à nouveau le formulaire",
-        "MULTIPLES_RESERVAS_ENCONTRADAS": "Plusieurs réservations ont été trouvées, indiquez le localisateur de réservation"
+        "MULTIPLES_RESERVAS_ENCONTRADAS": "Plusieurs réservations ont été trouvées, indiquez le localisateur de réservation",
+        "RESERVA_NO_DISPONIBLE_72_HORAS": "La réservation ne sera disponible que 72 heures avant l'enregistrement"
     }
     
 }

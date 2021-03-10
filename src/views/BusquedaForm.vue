@@ -24,6 +24,11 @@
                             <p class="text alert alert-success mb-0 mb-lg-4">{{this.textValues.RESERVA_COMPLETADA}}</p>
                         </div>
 
+                        <div class="c-message col-12" v-if="!isCheckinAvalaible">
+                            <!-- AÑADIR SIGUIENTE <p> EN EL CASO DE QUE HAYA UN ERROR -->
+                            <p class="text alert alert-warning mb-0 mb-lg-4">{{this.textValues.RESERVA_NO_DISPONIBLE_72_HORAS}}</p>
+                        </div>
+
                         <div class="form-group col-12 col-md-6">
                             <label for="" class="sr-only"></label>
                             <select class="form-control text" required :data-msg="this.textValues.MENSAJE_DATO_OBLIGATORIO" v-model="data.hotel">
@@ -200,6 +205,7 @@ export default {
           reserva_not_found: false,
           submitStatus: "OK",
           api_url: "",
+          isCheckinAvalaible: true,
           data: {
               hotel: "",
               nombre: "",
@@ -373,13 +379,20 @@ export default {
         .then(response => {
             
             if (response.data.LSReservas.length == 1) {
-                this.reserva_not_found = false;
-                if (this.data.localizador != "" && apellido != "") {
-                    this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=")
+                if (response.data.LSReservaHabAWA == 0) {
+                    this.reserva_not_found = false;
+                    if (this.data.localizador != "" && apellido != "") {
+                        this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=")
+                    }
+                    else {
+                        this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)
+                    }  
+                } if  (response.data.LSReservaHabAWA >= 4) {
+                    this.isCheckinAvalaible = false;
                 }
                 else {
-                    this.$router.push("listausuarios?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)
-                }  
+                    this.$router.push("reservas?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)
+                }
             } if (response.data.LSReservas.length > 1) {
                 this.multiples_reservas_founds = true;
                 // this.$router.push("reservas?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.data.hotel + "&localizator=" + this.data.localizador + "&fechaentrada=" + fechaEntrada + "&fechasalida=" + fechaSalida + "&apellido=" + apellido)

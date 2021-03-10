@@ -170,7 +170,7 @@
               <div class="form-group col-12 col-md-6 text">
                 <label class="text mr-auto mb-0 " style="color: #ffffff;">{{this.textValues.TELEFONO + (this.activeProfile.camposObligatorios.telefono || telefonoFirstCliente ? ' *' : '')}}</label>
                 <input v-model="data.telefono" type="text" class="form-control text">
-                <div class="text alert alert-danger mb-0 mb-lg-4" v-if="!$v.data.telefono.numeric">{{this.textValues.MENSAJE_ERROR_EMAIL_INCORRECTO}}</div>
+                <div class="text alert alert-danger mb-0 mb-lg-4" v-if="!$v.data.telefono.numeric">{{this.textValues.MENSAJE_ERROR_REVISAR_NUM_DOCUMENTO}}</div>
               </div>
 
               <!-- ------------------------------------------------ -->
@@ -234,7 +234,7 @@
               <!-- PROVINCIA -->
               <!-- ------------------------------------------------ -->
               <div class="form-group col-12 col-md-6 text">
-                <label class="text mr-auto mb-0 " style="color: #ffffff;">{{this.textValues.PROVINCIA + (this.activeProfile.camposObligatorios.provincia ? ' *' : '')}}</label>
+                <label class="text mr-auto mb-0 " style="color: #ffffff;">{{this.textValues.PROVINCIA + (this.activeProfile.camposObligatorios.provincia ? ' *' : '' || data.pais == 'esp' ? ' *' : '')}}</label>
                 <div v-if="data.pais == 'esp'">
                   <select name="provincia" v-model="data.provincia" class="text">
                     <option v-for="provincia in provincias" v-bind:key="provincia.name" :value="provincia.value">{{provincia.name}}</option>
@@ -286,6 +286,7 @@
                   <p v-if="error_cases.poblacion" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_POBLACION}}</p>
                   <p v-if="error_cases.provincia" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_PROVINCIA}}</p>
                   <p v-if="error_cases.codigo_postal" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_CODIGO_POSTAL}}</p>
+                  <p v-if="error_cases.codigo_postal_incorrecto" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_CODIGO_POSTAL_INCORRECTO}}</p>
                   <p v-if="error_cases.acepta_terminos" class="text alert alert-danger mb-0 mb-lg-4">{{this.textValues.MENSAJE_ERROR_FALTA_ACEPTAR_INFO}}</p>
                 </div>
 
@@ -353,6 +354,7 @@ import paisesJsonEn from '../assets/en/world'
 import paisesJsonFr from '../assets/fr/world'
 import paisesJsonDe from '../assets/de/world'
 import provinciasJson from '../assets/provincias'
+import codigopostalJson from '../assets/codigopostal'
 import json from '../../public/config/lang.json'
 //import profilesJson from '../../public/config/profiles.json'
 import { required, requiredIf, email, minLength, numeric } from "vuelidate/lib/validators";
@@ -422,6 +424,7 @@ export default {
       emailFirstCliente: false,
       telefonoFirstCliente: false,
       documentValidated: false,
+      isCPValidated: false,
       json: {},
       activeProfile: {
         camposObligatorios: {}
@@ -434,6 +437,7 @@ export default {
       sexo: "",
       paises: paisesJson,
       provincias: provinciasJson,
+      codigosPostales: codigopostalJson,
       isFormComplete: false,
       error_cases: {
         nombre: false,
@@ -450,8 +454,9 @@ export default {
         poblacion: false,
         provincia: false,
         codigo_postal: false,
+        codigo_postal_incorrecto: false,
         aceptar_info: false,
-        email: false
+        email: false,
       },
       data: {
         reserva_id: "",
@@ -586,13 +591,28 @@ export default {
           num_documento: CustomDocumentValidation,
           provincia: {
             required: requiredIf(function(data) {
-              return data.pais == 'ESP'
+              return data.pais == 'esp'
             })
           }
         }
       },
 
     methods: {
+      checkCP() {
+        if (this.data.pais != "esp") return;
+
+        let bool = false;
+
+            this.codigosPostales.forEach(element => {
+              console.log(element)
+              if (element.CodigoPostal == this.data.codigo_postal && element.Provincia == this.data.provincia) {
+                bool = true;
+                return true;
+              }
+            });
+
+          return bool;
+      },
       status(validation) {
           return {
           error: validation.$error,
@@ -600,7 +620,7 @@ export default {
         }
       },
       goBack() {
-        this.$router.push('listausuarios?lang=' + this.$route.query.lang + '&profile=' + this.$route.query.profile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id)
+        this.$router.push('listausuarios?lang=' + this.$route.query.lang + '&profile=' + this.$route.query.profile + '&hotel=' + this.$route.query.hotel + '&localizator=' + this.$route.query.localizator + '&fechaentrada=' + this.$route.query.fechaentrada + '&fechasalida=' + this.$route.query.fechasalida + '&apellido=' + this.$route.query.apellido + '&id=' + this.$route.query.id + '&referencia=' + this.$route.query.referencia)
       },
       checkForm() {
 
@@ -675,7 +695,7 @@ export default {
           this.error_cases.poblacion = false;
         }
 
-        if (this.activeProfile.camposObligatorios.provincia && this.data.provincia === "") {
+        if (this.activeProfile.camposObligatorios.provincia && this.data.provincia === "" || this.data.pais === "esp" && this.data.provincia === "") {
           this.error_cases.provincia = true;
         } else {
           this.error_cases.provincia = false;
@@ -685,6 +705,14 @@ export default {
           this.error_cases.codigo_postal = true;
         } else {
           this.error_cases.codigo_postal = false;
+        }
+
+        if (!this.checkCP()) {
+          this.error_cases.codigo_postal_incorrecto = true;
+          this.isCPValidated = false;
+        } else {
+          this.error_cases.codigo_postal_incorrecto = false;
+          this.isCPValidated = true;
         }
 
 
@@ -718,30 +746,27 @@ export default {
         });
 
         aux2.forEach(element => {
-          if (this.data[element.id] == "" || this.$route.query.id == "1" && this.data.telefono == "" || this.$route.query.id == "1" && this.data.email == "" || !this.documentValidated || !this.$v.data.telefono.numeric) {
+          if (this.data[element.id] == "" || this.$route.query.id == "1" && this.data.telefono == "" || this.$route.query.id == "1" && this.data.email == "" || !this.documentValidated || !this.$v.data.telefono.numeric || this.data.pais == "esp" && this.data.provincia == "" || !this.isCPValidated) {
             isAllComplete = false;
             return;
           };
         })
 
-        if (this.$route.query.id == "1") {
-
-        }
-
         if (isAllComplete) {
-          this.error_cases.nombre           = false;
-          this.error_cases.primer_apellido  = false;
-          this.error_cases.fecha_nacimiento = false;
-          this.error_cases.pais_nacimiento  = false;
-          this.error_cases.pais_residencia  = false;
-          this.error_cases.sexo             = false;
-          this.error_cases.tipo_doc         = false;
-          this.error_cases.num_documento    = false;
-          this.error_cases.fecha_expedicion = false;
-          this.error_cases.pais             = false;
-          this.error_cases.aceptar_info     = false;
-          this.error_cases.email            = false;
-          this.error_cases.acepta_terminos  = false;
+          this.error_cases.nombre                   = false;
+          this.error_cases.primer_apellido          = false;
+          this.error_cases.fecha_nacimiento         = false;
+          this.error_cases.pais_nacimiento          = false;
+          this.error_cases.pais_residencia          = false;
+          this.error_cases.sexo                     = false;
+          this.error_cases.tipo_doc                 = false;
+          this.error_cases.num_documento            = false;
+          this.error_cases.fecha_expedicion         = false;
+          this.error_cases.pais                     = false;
+          this.error_cases.aceptar_info             = false;
+          this.error_cases.email                    = false;
+          this.error_cases.acepta_terminos          = false;
+          this.error_cases.provincia                = false;
 
           this.goSign();
         }
@@ -856,7 +881,7 @@ export default {
           this.data.fecha_nacimiento = yearNa + "-" + (monthNa < 10 ? '0' + monthNa : monthNa) + "-" + (dayNa < 10 ? '0' + dayNa : dayNa);
           localStorage.clear();
           localStorage.data = JSON.stringify(this.data);
-          this.$router.push("/checkin?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.$route.query.hotel + "&localizator=" + this.$route.query.localizator + "&fechaentrada=" + this.$route.query.fechaentrada + "&fechasalida=" + this.$route.query.fechasalida + "&apellido=" + this.$route.query.apellido + "&id=" + this.$route.query.id + "&reserva=" + this.$route.query.reserva);
+          this.$router.push("/checkin?lang=" + this.actualLang + "&profile=" + this.actualProfile + "&hotel=" + this.$route.query.hotel + "&localizator=" + this.$route.query.localizator + "&fechaentrada=" + this.$route.query.fechaentrada + "&fechasalida=" + this.$route.query.fechasalida + "&apellido=" + this.$route.query.apellido + "&id=" + this.$route.query.id + "&reserva=" + this.$route.query.reserva + '&referencia=' + this.$route.query.referencia);
         },
         test () {
           if (this.$route.query.lang === "es") {
@@ -876,13 +901,49 @@ export default {
       this.loadProfiles();
     },
 
-    mounted() {
+    async mounted() {
       if (this.$route.query.id == "1") {
           this.emailFirstCliente = true;
           this.telefonoFirstCliente = true;
         } 
         
         this.test();
+
+        let xd = [];
+
+        let xd2 = [
+          {"Provincia": "PRUEBA"},
+          {"Provincia": "PRUEBA"},
+          {"Provincia": "PRUEBA2"},
+          {"Provincia": "PRUEBA"},
+          {"Provincia": "PRUEB33"},
+          {"Provincia": "PRUEBA"},
+          {"Provincia": "dsfsdfdfs"},
+          {"Provincia": "PRUEBA"},
+          {"Provincia": "dfggggg"},
+          ]
+
+          
+
+        this.codigosPostales.forEach(element => {
+          xd.push(element.Provincia)
+        })
+
+        let dfgdgf = new Set(xd);
+
+        
+
+        let aux = Array.from(dfgdgf);
+        let aux2 = []
+
+
+        aux.forEach(item => {
+          aux2.push({"name": item, "value": item});
+        })
+
+
+      console.log(aux2)
+        
     }
 }
 </script>
