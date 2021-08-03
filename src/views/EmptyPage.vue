@@ -12,7 +12,7 @@ export default {
     let profile = this.$route.query.profile;
 
     if (lang == undefined) lang = "es";
-    if (profile == undefined) profile = "default";
+    if (profile == undefined) profile = "alua";
 
     this.$router.push("/busqueda?lang=" + lang + "&profile=" + profile)
   }

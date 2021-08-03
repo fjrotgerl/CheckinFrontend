@@ -307,7 +307,7 @@
 
 <div class="container-fluid mb-3" v-if="activeProfile.showBanner == 1">
         <div class="row">
-            <div class="c-logos col-12 py-3" :style="'background-color: ' + this.activeProfile.colorBrand + ';'">
+            <div class="col-12 py-3" :style="'background-color: ' + this.activeProfile.colorBrand + ';'">
                 <h2 class="text title col-12 col-md-6 col-xl-4 mx-md-auto text-center mb-3">
                     <!-- https://www.amresortseu.com/wp-content/themes/adgtravel/img/logo.png --> 
                     <a :href="this.activeProfile.bannerHeader.url" class="btn btn-reset btn-block">
@@ -315,9 +315,9 @@
                     </a>
                 </h2>
                 <div class="wrapper d-flex w-100 flex-wrap justify-content-center">
-                    <div class="col-6 col-md-2 mb-3" v-for="element in banners" v-bind:key="element.img">
+                    <div class="col-6 col-md-1 mb-3" v-for="element in banners" v-bind:key="element.img" >
                         <a :href="element.url" class="btn btn-reset btn-block">
-                            <img :src="element.img" alt="" class="img img-w img-auto">
+                            <img :src="element.img" alt="" class="img img-w img-auto" width="50px">
                         </a>
                     </div>
                     
@@ -790,6 +790,13 @@ export default {
     },
     
       async getReserva() {
+
+        this.hotels.forEach(item => {
+            if (item.id == this.data.hotel && item.api_url != "") {
+                this.api_url = item.api_url;
+            }
+        })
+        
         //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
         await this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida)
         .then(response => {

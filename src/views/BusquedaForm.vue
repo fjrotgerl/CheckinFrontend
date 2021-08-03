@@ -146,19 +146,37 @@
         </div>
         <!-- FIN FORM DE BUSQUEDA DE RESERVA -->
 
-        <div class="container-fluid mb-3" v-if="activeProfile.showBanner == 1">
+    <div class="container-fluid mb-3" v-if="activeProfile.showBanner == 1">
         <div class="row">
-            <div class="col-12 py-3" :style="'background-color: ' + this.activeProfile.colorBrand + ';'">
-                
-                <div class="">
+            <div class="col-12 py-3 " :style="'background-color: ' + this.activeProfile.colorBrand + ';'">
+                <h2 class="text title col-12 col-md-6 col-xl-4 mx-md-auto text-center mb-3">
+                    <!-- https://www.amresortseu.com/wp-content/themes/adgtravel/img/logo.png --> 
+                    <a :href="this.activeProfile.bannerHeader.url" class="btn btn-reset btn-block">
+                        <img :src="this.activeProfile.bannerHeader.img" alt="" class="w-75">
+                    </a>
+                </h2>
+                <div class="wrapper d-flex p-3 w-100 flex-wrap justify-content-center align-items-center">
+                    <div class="col-8 col-md-3 col-lg-3 col-xl-1" v-for="element in banners" v-bind:key="element.img" >
+                        <a :href="element.url" class="btn btn-reset btn-block" style="margin: 0 auto;">
+                            <img :src="element.img" alt="" class="w-100" >
+                        </a>
+                    </div>
+                    
+                </div>
+
+
+                <!-- <div class="">
                     <div class="" v-for="element in banners" v-bind:key="element.img">
                         <a :href="element.url" class="btn btn-reset btn-block">
+                            <img :src="element.img" alt="" class="img img-w img-auto d-md-block d-none" :width="element.width">
+                            <img :src="element.img" alt="" class="img img-w img-auto d-md-none d-block" :width="element.width">
+
                             <img :src="element.img" alt="" class="img img-w img-auto d-md-block d-none" :width="element.width">
                             <img :src="element.img" alt="" class="img img-w img-auto d-md-none d-block" :width="element.width">
                         </a>
                     </div>
                     
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -205,6 +223,7 @@ export default {
           reserva_not_found: false,
           submitStatus: "OK",
           api_url: "",
+          api_custom_url: "",
           isCheckinAvalaible: true,
           data: {
               hotel: "",
@@ -341,6 +360,7 @@ export default {
             })
     },
     submit() {
+
         this.$v.$touch()
         if (this.$v.$invalid) {
             this.submitStatus = 'ERROR'
@@ -374,6 +394,12 @@ export default {
         // fechaSalida = (fechaSalida.getDate() < 10 ? "0" : "") + (fechaSalida.getDate()) + "-" (fechaEntrada.getMonth() < 9 ? "0" : "") + (fechaEntrada.getMonth() + 1) + "-" + fechaEntrada.getFullYear();
 
         let apellido = this.data.primer_apellido.toLowerCase();
+
+        this.hotels.forEach(item => {
+            if (item.id == this.data.hotel && item.api_url != "") {
+                this.api_url = item.api_url;
+            }
+        })
 
         this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.data.hotel + "&Localizador=" + this.data.localizador + "&FechaEntrada=" + fechaEntrada + "&FechaSalida=" + fechaSalida + "&Apellido=" + apellido)
         .then(response => {
@@ -455,3 +481,25 @@ export default {
  
 }
 </script>
+
+<style scoped>
+.column {
+  float: left;
+  width: 12.5%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
