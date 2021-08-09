@@ -218,7 +218,7 @@ export default {
         getReserva() {
 
             this.hotels.forEach(item => {
-            if (item.id == this.data.hotel && item.api_url != "") {
+            if (item.id == this.dataForRequest.hotel && item.api_url != "") {
                     this.api_url = item.api_url;
                 }
             })

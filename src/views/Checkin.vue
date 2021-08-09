@@ -288,7 +288,7 @@ export default {
 
       let data = JSON.parse(localStorage.data);
 
-      await this.axios.post("http://10.5.0.22:8081/getHTMLText", {
+      await this.axios.post(this.activeProfile.custom_api_url + "/getHTMLText", {
           pdf: {
             pdfList: pdfsToPrint, 
           }, 
@@ -318,6 +318,7 @@ export default {
           }
         }).then(response => {
         this.html = response.data;
+        console.log(this.html);
       }).catch(error => {
         console.error(error)
       })
@@ -401,7 +402,7 @@ export default {
 
       let c = document.getElementById("myCanvas");
 
-      this.axios.post("http://localhost:8081/exportPDF", {
+      this.axios.post(this.activeProfile.custom_api_url + "/exportPDF", {
           pdfName: "PEPE",
           base64Sign: c.toDataURL(),
           reservaInfoForPDF: {

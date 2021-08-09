@@ -181,13 +181,13 @@ export default {
                 this.getReserva();
             })
     },
-        getReserva() {
+        async getReserva() {
             //this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)
             
             this.hotels.forEach(item => {
-                if (item.id == this.data.hotel && item.api_url != "") {
+                if (item.id == this.dataForRequest.hotel && item.api_url != "") {
                     this.api_url = item.api_url;
-                }
+                } 
             })
 
             this.axios.get(this.api_url + "/GetAWAReservationPCI?Hotel=" + this.dataForRequest.hotel + "&Localizador=" + this.dataForRequest.localizador + "&FechaEntrada=" + this.dataForRequest.fecha_entrada + "&FechaSalida=" + this.dataForRequest.fecha_salida + "&Apellido=" + this.dataForRequest.apellido)

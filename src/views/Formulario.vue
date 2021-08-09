@@ -370,12 +370,15 @@ function CustomDocumentValidation() {
     let numero
     let letr
     let letra
+  
     if(DNI_REGEX.test(this.data.num_documento) == true){
       numero = this.data.num_documento.substr(0,this.data.num_documento.length-1);
       letr = this.data.num_documento.substr(this.data.num_documento.length-1,1);
       numero = numero % 23;
+      console.log(numero)
       letra='TRWAGMYFPDXBNJZSQVHLCKET';
       letra=letra.substring(numero,numero+1);
+      console.log(letra)
       if (letra!=letr.toUpperCase()) {
         this.documentValidated = false;
         return false;
@@ -599,12 +602,11 @@ export default {
 
     methods: {
       checkCP() {
-        if (this.data.pais != "esp") return;
+        if (this.data.pais != "esp") return true;
 
         let bool = false;
 
             this.codigosPostales.forEach(element => {
-              console.log(element)
               if (element.CodigoPostal == this.data.codigo_postal && element.Provincia == this.data.provincia) {
                 bool = true;
                 return true;
@@ -918,19 +920,6 @@ export default {
 
         let xd = [];
 
-        let xd2 = [
-          {"Provincia": "PRUEBA"},
-          {"Provincia": "PRUEBA"},
-          {"Provincia": "PRUEBA2"},
-          {"Provincia": "PRUEBA"},
-          {"Provincia": "PRUEB33"},
-          {"Provincia": "PRUEBA"},
-          {"Provincia": "dsfsdfdfs"},
-          {"Provincia": "PRUEBA"},
-          {"Provincia": "dfggggg"},
-          ]
-
-          
 
         this.codigosPostales.forEach(element => {
           xd.push(element.Provincia)
